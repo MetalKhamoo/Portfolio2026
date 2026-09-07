@@ -548,7 +548,7 @@ function App() {
             }
             aria-label="Go home"
           >
-            PD<span>.</span>
+            PD<span></span>
           </button>
 
 
