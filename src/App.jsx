@@ -377,11 +377,10 @@ function ParticleField() {
 ========================================= */
 
 function App() {
-  const [open, setOpen] =
-    useState(false);
+  const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
-  const heroRef =
-    useRef(null);
+  const heroRef = useRef(null);
 
 
   /* =========================================
@@ -397,6 +396,60 @@ function App() {
 
     return () => {
       lenis.destroy();
+    };
+  }, []);
+
+
+  /* =========================================
+     ACTIVE NAVIGATION SECTION
+  ========================================= */
+
+  useEffect(() => {
+    const sectionIds = [
+      "home",
+      "about",
+      "experience",
+      "work",
+      "skills",
+      "contact",
+    ];
+
+    const updateActiveSection = () => {
+      const navOffset = 120;
+      let current = "home";
+      let closestDistance = Infinity;
+
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= navOffset) {
+          const distance = Math.abs(rect.top - navOffset);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            current = id;
+          }
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, []);
 
@@ -485,47 +538,112 @@ function App() {
           >
 
             <button
+              className={activeSection === "home" ? "active" : ""}
               onClick={() =>
                 scrollTo("home")
               }
             >
               Home
+
+              {activeSection === "home" && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="nav-indicator"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                />
+              )}
             </button>
 
 
             <button
-              onClick={() =>
-                scrollTo("work")
-              }
-            >
-              Work
-            </button>
-
-
-            <button
+              className={activeSection === "experience" ? "active" : ""}
               onClick={() =>
                 scrollTo("experience")
               }
             >
               Experience
+
+              {activeSection === "experience" && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="nav-indicator"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                />
+              )}
             </button>
 
 
             <button
+              className={activeSection === "work" ? "active" : ""}
+              onClick={() =>
+                scrollTo("work")
+              }
+            >
+              Work
+
+              {activeSection === "work" && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="nav-indicator"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                />
+              )}
+            </button>
+
+
+            <button
+              className={activeSection === "skills" ? "active" : ""}
               onClick={() =>
                 scrollTo("skills")
               }
             >
               Skills
+
+              {activeSection === "skills" && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="nav-indicator"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                />
+              )}
             </button>
 
 
             <button
+              className={activeSection === "contact" ? "active" : ""}
               onClick={() =>
                 scrollTo("contact")
               }
             >
               Contact
+
+              {activeSection === "contact" && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="nav-indicator"
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                />
+              )}
             </button>
 
 
@@ -1173,7 +1291,6 @@ function App() {
               </div>
 
             </motion.article>
-
 
             {/* =================================
                 EXPERIENCE 04
