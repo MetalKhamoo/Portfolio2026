@@ -8,6 +8,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  Download,
   BrainCircuit,
   Code2,
   Database,
@@ -38,6 +39,8 @@ const LINKEDIN =
 
 const EMAIL =
   "mailto:pratham.deepak.2704@gmail.com";
+
+const RESUME_URL = "/resume.pdf";
 
 
 /* =========================================
@@ -378,9 +381,26 @@ function ParticleField() {
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   const heroRef = useRef(null);
+
+  useEffect(() => {
+    if (!resumeOpen) return;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setResumeOpen(false);
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    document.body.classList.add("resume-open");
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.classList.remove("resume-open");
+    };
+  }, [resumeOpen]);
 
 
   /* =========================================
@@ -528,7 +548,7 @@ function App() {
             }
             aria-label="Go home"
           >
-            PD<span></span>
+            PD<span>.</span>
           </button>
 
 
@@ -648,15 +668,19 @@ function App() {
             </button>
 
 
-            <a
+            <button
               className="nav-resume"
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                setResumeOpen(true);
+              }}
               aria-label="Open resume"
+              aria-haspopup="dialog"
+              aria-expanded={resumeOpen}
             >
               Resume
-            </a>
+            </button>
 
           </div>
 
@@ -680,6 +704,73 @@ function App() {
         </nav>
 
       </header>
+
+      {resumeOpen && (
+        <div
+          className="resume-drawer-layer"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Resume preview"
+        >
+          <button
+            className="resume-backdrop"
+            type="button"
+            onClick={() => setResumeOpen(false)}
+            aria-label="Close resume preview"
+          />
+
+          <motion.aside
+            className="resume-drawer"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 32 }}
+          >
+            <div className="resume-drawer-head">
+              <div>
+                <span className="resume-drawer-kicker">DOCUMENT</span>
+                <h2>Resume</h2>
+              </div>
+
+              <button
+                className="resume-close"
+                type="button"
+                onClick={() => setResumeOpen(false)}
+                aria-label="Close resume"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="resume-viewer">
+              <iframe
+                src={`${RESUME_URL}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
+                title="Pratham Deepak Resume"
+                loading="eager"
+              style={{ background: "#fff" }}
+              />
+            </div>
+
+            <div className="resume-drawer-actions">
+              <a
+                className="resume-download"
+                href={RESUME_URL}
+                download="Pratham_Deepak_Resume.pdf"
+              >
+                Download PDF <Download size={16} />
+              </a>
+
+              <a
+                className="resume-open-new"
+                href={RESUME_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open full PDF <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </motion.aside>
+        </div>
+      )}
 
 
       <main>
