@@ -415,26 +415,28 @@ function App() {
     ];
 
     const updateActiveSection = () => {
-      const navOffset = 120;
-      let current = "home";
-      let closestDistance = Infinity;
+      // Pick the section that currently occupies the activation point
+      // in the viewport. This is more reliable than checking which
+      // section top is closest to the navbar, especially for Contact.
+      const activationPoint = window.innerHeight * 0.42;
 
-      sectionIds.forEach((id) => {
+      let current = "home";
+
+      for (const id of sectionIds) {
         const section = document.getElementById(id);
 
-        if (!section) return;
+        if (!section) continue;
 
         const rect = section.getBoundingClientRect();
 
-        if (rect.top <= navOffset) {
-          const distance = Math.abs(rect.top - navOffset);
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            current = id;
-          }
+        if (
+          rect.top <= activationPoint &&
+          rect.bottom >= activationPoint
+        ) {
+          current = id;
+          break;
         }
-      });
+      }
 
       setActiveSection(current);
     };
