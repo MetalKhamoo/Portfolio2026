@@ -1171,3 +1171,449 @@ footer {
     flex-direction: column;
   }
 }
+/* =========================================================
+   EXPERIENCE — TILE / CARD LAYOUT
+========================================================= */
+
+.experience {
+  position: relative;
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+
+/* =========================================================
+   EXPERIENCE HEADER
+========================================================= */
+
+.experience-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 60px;
+  margin-bottom: 55px;
+}
+
+.experience-head > div {
+  flex: 1;
+}
+
+.experience-head > p {
+  max-width: 320px;
+  margin: 0 0 8px;
+  color: #8199b2;
+  font-family: "Manrope", Inter, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   EXPERIENCE GRID
+========================================================= */
+
+.experience-grid {
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr)) !important;
+
+  gap: 24px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   EXPERIENCE CARD
+========================================================= */
+
+.experience-card {
+  position: relative;
+
+  min-height: 390px;
+
+  padding: 40px;
+
+  display: flex !important;
+  flex-direction: column;
+
+  border: 1px solid
+    rgba(120, 175, 220, 0.18);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(13, 25, 41, 0.82),
+      rgba(7, 16, 29, 0.92)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.025),
+    0 20px 60px
+      rgba(0, 0, 0, 0.22);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* =========================================================
+   CARD BACKGROUND GLOW
+========================================================= */
+
+.experience-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  top: -150px;
+  right: -100px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(85, 170, 255, 0.13),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CARD BOTTOM GLOW
+========================================================= */
+
+.experience-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  bottom: -160px;
+  left: -80px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(85, 170, 255, 0.06),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   FEATURED EXPERIENCE
+========================================================= */
+
+.featured-experience {
+  border-color:
+    rgba(85, 170, 255, 0.42);
+
+  box-shadow:
+    0 20px 70px
+      rgba(0, 0, 0, 0.28),
+    0 0 40px
+      rgba(85, 170, 255, 0.08);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.experience-card:hover {
+  transform: translateY(-8px);
+
+  border-color:
+    rgba(85, 170, 255, 0.45);
+
+  box-shadow:
+    0 30px 80px
+      rgba(0, 0, 0, 0.32),
+    0 0 50px
+      rgba(85, 170, 255, 0.10);
+}
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+.experience-year {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 28px;
+
+  color: #8aa8c5;
+
+  font-family:
+    "Manrope",
+    Inter,
+    sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   EXPERIENCE TITLE
+========================================================= */
+
+.experience-card h3 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  max-width: 560px;
+
+  color: #edf5ff;
+
+  font-family:
+    "Manrope",
+    Inter,
+    sans-serif;
+
+  font-size: clamp(
+    25px,
+    2.5vw,
+    34px
+  );
+
+  font-weight: 700;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   ORGANIZATION
+========================================================= */
+
+.experience-card h4 {
+  position: relative;
+  z-index: 2;
+
+  margin: 14px 0 0;
+
+  color: #64809b;
+
+  font-family:
+    "Manrope",
+    Inter,
+    sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.experience-card p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 580px;
+
+  margin: 28px 0 0;
+
+  color: #8199b2;
+
+  font-family:
+    "Manrope",
+    Inter,
+    sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   TAG CONTAINER
+========================================================= */
+
+.experience-tags {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: auto;
+
+  padding-top: 32px;
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.experience-tags span {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 30px;
+
+  padding:
+    5px 12px;
+
+  border:
+    1px solid
+    rgba(95, 157, 205, 0.22);
+
+  border-radius: 999px;
+
+  background:
+    rgba(45, 100, 145, 0.08);
+
+  color: #78b7e6;
+
+  font-family:
+    "Manrope",
+    Inter,
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+
+  white-space: nowrap;
+}
+
+
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .experience {
+    padding-top: 110px;
+    padding-bottom: 110px;
+  }
+
+  .experience-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .experience-head > p {
+    max-width: 500px;
+    margin: 0;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .experience-card {
+    min-height: 340px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 620px) {
+
+  .experience {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .experience-head {
+    margin-bottom: 35px;
+  }
+
+  .experience-grid {
+    gap: 16px;
+  }
+
+  .experience-card {
+    min-height: 350px;
+
+    padding: 28px;
+  }
+
+  .experience-year {
+    margin-bottom: 22px;
+
+    font-size: 11px;
+  }
+
+  .experience-card h3 {
+    font-size: 27px;
+  }
+
+  .experience-card h4 {
+    font-size: 12px;
+  }
+
+  .experience-card p {
+    margin-top: 22px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+  .experience-tags {
+    padding-top: 26px;
+  }
+
+}

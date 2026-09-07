@@ -492,6 +492,7 @@ function App() {
               Home
             </button>
 
+
             <button
               onClick={() =>
                 scrollTo("work")
@@ -500,13 +501,15 @@ function App() {
               Work
             </button>
 
+
             <button
               onClick={() =>
-                scrollTo("about")
+                scrollTo("experience")
               }
             >
-              About
+              Experience
             </button>
+
 
             <button
               onClick={() =>
@@ -516,6 +519,7 @@ function App() {
               Skills
             </button>
 
+
             <button
               onClick={() =>
                 scrollTo("contact")
@@ -524,12 +528,14 @@ function App() {
               Contact
             </button>
 
+
             <a
               href={GITHUB}
               target="_blank"
               rel="noreferrer"
             >
               GitHub
+
               <ArrowUpRight
                 size={13}
               />
@@ -537,6 +543,8 @@ function App() {
 
           </div>
 
+
+          {/* Mobile menu */}
 
           <button
             className="menu"
@@ -686,10 +694,10 @@ function App() {
                 <button
                   className="secondary"
                   onClick={() =>
-                    scrollTo("about")
+                    scrollTo("experience")
                   }
                 >
-                  About Me
+                  Experience
                 </button>
 
               </div>
@@ -898,185 +906,350 @@ function App() {
 
 
         {/* =====================================================
-            02 / BEYOND CODE
+            02 / EXPERIENCE
         ===================================================== */}
 
         <section
-          className="section leadership"
+          id="experience"
+          className="section experience"
         >
 
-          <div className="section-head">
+          <div className="section-head experience-head">
 
             <div>
 
               <span className="section-index">
-                02 / BEYOND CODE
+                02 / EXPERIENCE
               </span>
 
               <h2>
-                Leadership &
-                involvement.
+                Where I've made
+                <br />
+                an impact.
               </h2>
 
             </div>
 
+
+            <p>
+              Leadership,
+              collaboration
+              and experiences
+              beyond writing
+              code.
+            </p>
+
           </div>
 
 
-          <div className="timeline">
+          <div className="experience-grid">
 
 
             {/* =================================
-                PUBLIC RELATIONS
+                EXPERIENCE 01
             ================================= */}
 
-            <motion.div
-              className="timeline-item"
+            <motion.article
+              className="experience-card featured-experience"
 
               initial={{
                 opacity: 0,
-                x: -30,
+                y: 45,
               }}
 
               whileInView={{
                 opacity: 1,
-                x: 0,
+                y: 0,
               }}
 
               viewport={{
                 once: true,
-              }}
-            >
-
-              <span>
-                2025 — 2026
-              </span>
-
-
-              <div>
-
-                <h3>
-                  Head · Public
-                  Relations, STME
-                </h3>
-
-                <p>
-                  Led campaigns
-                  for institute
-                  events, managed
-                  a team and
-                  ensured timely
-                  delivery.
-                </p>
-
-              </div>
-
-            </motion.div>
-
-
-            {/* =================================
-                PHOTOGRAPHY
-            ================================= */}
-
-            <motion.div
-              className="timeline-item"
-
-              initial={{
-                opacity: 0,
-                x: -30,
-              }}
-
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-
-              viewport={{
-                once: true,
+                margin: "-100px",
               }}
 
               transition={{
-                delay: 0.1,
+                duration: 0.7,
+                ease: "easeOut",
               }}
             >
 
-              <span>
-                2024 — 2025
-              </span>
+              <div className="experience-year">
+                2025 - 2026
+              </div>
 
 
-              <div>
+              <h3>
+                Head · Public Relations
+              </h3>
 
-                <h3>
-                  Photography Head ·
-                  Public Relations,
-                  STME
-                </h3>
 
-                <p>
-                  Led event
-                  photography and
-                  visual
-                  documentation
-                  for reports,
-                  promotions and
-                  social media.
-                </p>
+              <h4>
+                STME, NMIMS Navi Mumbai              
+              </h4>
+
+
+              <p>
+                Managed an 80+ member
+                Public Relations team
+                responsible for
+                communication and
+                execution across 10+
+                institute events. Oversaw
+                task delegation, cross-
+                team coordination and
+                delivery timelines,
+                ensuring event
+                requirements were
+                completed on schedule.
+              </p>
+
+
+              <div className="experience-tags">
+
+                <span>
+                  Leadership
+                </span>
+
+                <span>
+                  Team Management
+                </span>
+
+                <span>
+                  Communications
+                </span>
 
               </div>
 
-            </motion.div>
+            </motion.article>
 
 
             {/* =================================
-                ROTARACT
+                EXPERIENCE 02
             ================================= */}
 
-            <motion.div
-              className="timeline-item"
+            <motion.article
+              className="experience-card"
 
               initial={{
                 opacity: 0,
-                x: -30,
+                y: 45,
               }}
 
               whileInView={{
                 opacity: 1,
-                x: 0,
+                y: 0,
               }}
 
               viewport={{
                 once: true,
+                margin: "-100px",
               }}
 
               transition={{
-                delay: 0.2,
+                duration: 0.7,
+                delay: 0.12,
+                ease: "easeOut",
               }}
             >
 
-              <span>
-                2024 — 2025
-              </span>
+              <div className="experience-year">
+                2024 - 2025
+              </div>
 
 
-              <div>
+              <h3>
+                Photography Head · Public Relations
+              </h3>
 
-                <h3>
-                  Sports Joint
-                  Director ·
-                  Rotaract
-                </h3>
 
-                <p>
-                  Helped organize
-                  fundraising and
-                  community
-                  events.
-                </p>
+              <h4>
+                STME, NMIMS Navi Mumbai
+              </h4>
+
+
+              <p>
+                Led the photography
+                team across 10+ institute
+                events, overseeing event
+                coverage, visual content
+                and documentation for
+                promotional campaigns,
+                reports and social media.
+                Managed timely delivery
+                of visual assets.
+              </p>
+
+
+              <div className="experience-tags">
+
+                <span>
+                  Photography
+                </span>
+
+                <span>
+                  Visual Media
+                </span>
+
+                <span>
+                  Creative Direction
+                </span>
 
               </div>
 
-            </motion.div>
+            </motion.article>
+
+
+            {/* =================================
+                EXPERIENCE 03
+            ================================= */}
+
+            <motion.article
+              className="experience-card"
+
+              initial={{
+                opacity: 0,
+                y: 45,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              viewport={{
+                once: true,
+                margin: "-100px",
+              }}
+
+              transition={{
+                duration: 0.7,
+                delay: 0.24,
+                ease: "easeOut",
+              }}
+            >
+
+              <div className="experience-year">
+                2024 - 2025
+              </div>
+
+
+              <h3>
+                Sports Joint Director, Mumbai · 
+              </h3>
+
+
+              <h4>
+                Rotaract Club of
+                Parleshware Genz
+              </h4>
+
+
+              <p>
+                Coordinated sports,
+                community and fundraising
+                initiatives, working with
+                student teams to plan
+                and execute events.
+                Managed responsibilities,
+                team coordination and
+                on-ground execution.
+              </p>
+
+
+              <div className="experience-tags">
+
+                <span>
+                  Event Management
+                </span>
+
+                <span>
+                  Teamwork
+                </span>
+
+                <span>
+                  Community
+                </span>
+
+              </div>
+
+            </motion.article>
+
+
+            {/* =================================
+                EXPERIENCE 04
+            ================================= */}
+
+            <motion.article
+              className="experience-card"
+
+              initial={{
+                opacity: 0,
+                y: 45,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              viewport={{
+                once: true,
+                margin: "-100px",
+              }}
+
+              transition={{
+                duration: 0.7,
+                delay: 0.36,
+                ease: "easeOut",
+              }}
+            >
+
+              <div className="experience-year">
+                May '24
+              </div>
+
+
+              <h3>
+                Community Service Volunteer
+              </h3>
+
+
+              <h4>
+                Smiles Foundation
+              </h4>
+
+
+              <p>
+                Completed a 3-week community
+                service program at the Nerul
+                branch, contributing to NGO-led
+                social initiatives. Participated
+                in organizing and supporting
+                community outreach activities
+                aimed at improving local welfare.
+              </p>
+
+
+              <div className="experience-tags">
+
+                <span>
+                  Community Service
+                </span>
+
+                <span>
+                  Social Impact
+                </span>
+
+                <span>
+                  Outreach
+                </span>
+
+              </div>
+
+            </motion.article>
+
+            
+
 
           </div>
 
@@ -1130,6 +1303,7 @@ function App() {
                       ? "featured"
                       : ""
                   }`}
+
                   key={
                     project.title
                   }
