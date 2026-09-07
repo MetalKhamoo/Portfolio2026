@@ -80,16 +80,6 @@ a {
   min-height: 100vh;
   overflow: visible;
   position: relative;
-} 
-
-main {
-  position: relative;
-  z-index: 1;
-}
-
-html,
-body {
-  overflow-x: hidden;
 }
 
 .noise {
@@ -111,28 +101,21 @@ body {
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
-
   width: 100%;
   height: 72px;
-
   z-index: 99999 !important;
 
-  /* Solid top layer — sections cannot show through it */
   background: #07101d;
-
   border-bottom: 1px solid rgba(120, 175, 220, 0.18);
-
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.35);
-
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   isolation: isolate;
-
   transform: translateZ(0) !important;
   will-change: transform;
 }
 
 .nav {
   max-width: 1180px;
+  width: 100%;
   height: 72px;
   margin: auto;
   padding: 0 28px;
@@ -149,20 +132,17 @@ body {
   position: absolute;
   left: 28px;
   top: 50%;
-
   transform: translateY(-50%);
 
   border: 0;
   background: transparent;
-
-  color: var(--text);
 
   font-weight: 900;
   font-size: 20px;
   letter-spacing: -0.08em;
 
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 }
 
 .brand span {
@@ -171,82 +151,115 @@ body {
 
 .nav-links {
   display: flex;
+  gap: 32px;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-
   position: relative;
   z-index: 2;
 }
 
 .nav-links button,
 .nav-links a {
-  position: relative;
-
   border: 0;
   background: transparent;
-
   color: #aebdcc;
-
   font-size: 13px;
-  line-height: 1;
-
   cursor: pointer;
 
   display: inline-flex;
   align-items: center;
   gap: 4px;
 
-  padding: 10px 0;
-
   transition: color 0.25s ease;
 }
 
-.nav-links button:hover,
-.nav-links a:hover {
-  color: #ffffff;
+.nav-links button {
+  position: relative;
+  padding: 8px 0 11px;
 }
 
 .nav-links button.active {
   color: #ffffff;
 }
 
-/* One shared animated slider moves between active sections */
 .nav-indicator {
   position: absolute;
-
   left: 0;
   right: 0;
-  bottom: -3px;
-
+  bottom: 2px;
   height: 2px;
-
   border-radius: 999px;
-
   background: var(--accent);
-
   box-shadow:
     0 0 8px rgba(85, 170, 255, 0.9),
     0 0 18px rgba(85, 170, 255, 0.4);
-
   pointer-events: none;
+}
+
+.nav-links button:hover,
+.nav-links a:hover {
+  color: white;
+}
+
+/* Resume button */
+.nav-links .nav-resume {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 17px;
+  border-radius: 999px;
+  background: #62b7e8;
+  color: #06111c;
+  font-size: 13px;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 5px 18px rgba(66, 158, 218, 0.18);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-links .nav-resume:hover {
+  color: #06111c;
+  background: #79c7f1;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 22px rgba(66, 158, 218, 0.28);
+}
+
+/* Desktop:
+   PD. on the left,
+   navigation exactly centered,
+   Resume on the right. */
+@media (min-width: 901px) {
+  .nav-links .nav-resume {
+    position: fixed;
+    right: max(28px, calc((100vw - 1180px) / 2 + 28px));
+    top: 17px;
+  }
 }
 
 .menu {
   display: none;
-
-  border: 0;
   background: transparent;
-
-  color: var(--text);
-
+  border: 0;
   cursor: pointer;
-  z-index: 3;
 }
 
 /* =========================
    COMMON
 ========================= */
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
+}
 
 .section {
   max-width: 1180px;
@@ -1079,21 +1092,18 @@ footer {
 ========================= */
 
 @media (max-width: 900px) {
-  .nav {
-    justify-content: space-between;
-  }
-
-  .nav-wrap {
-    height: 64px;
-  }
-
-  .nav {
-    height: 64px;
-  }
-
   .brand {
-    position: static;
-    transform: none;
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .menu {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .nav-links {
@@ -1125,15 +1135,10 @@ footer {
     padding: 10px;
   }
 
-  .nav-links button::after {
-    left: 0;
-    bottom: 0;
-    width: 0;
-    transform: none;
-  }
-
-  .nav-links button.active::after {
-    width: 100%;
+  .nav-links .nav-resume {
+    position: static;
+    right: auto;
+    top: auto;
   }
 
   .menu {
@@ -1773,9 +1778,4 @@ footer {
 
   pointer-events: none;
   z-index: 5;
-}
-
-/* Keep sections from hiding behind the fixed navigation */
-section[id] {
-  scroll-margin-top: 84px;
 }

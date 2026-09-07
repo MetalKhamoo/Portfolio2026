@@ -407,7 +407,6 @@ function App() {
   useEffect(() => {
     const sectionIds = [
       "home",
-      "about",
       "experience",
       "work",
       "skills",
@@ -529,7 +528,7 @@ function App() {
             }
             aria-label="Go home"
           >
-            PD<span>.</span>
+            PD<span></span>
           </button>
 
 
@@ -650,15 +649,13 @@ function App() {
 
 
             <a
-              href={GITHUB}
+              className="nav-resume"
+              href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
+              aria-label="Open resume"
             >
-              GitHub
-
-              <ArrowUpRight
-                size={13}
-              />
+              Resume
             </a>
 
           </div>
