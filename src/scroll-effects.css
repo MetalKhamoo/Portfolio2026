@@ -1,0 +1,245 @@
+/* =========================================
+   PRATHAM PORTFOLIO
+   CINEMATIC SCROLL EFFECTS
+========================================= */
+
+
+/* =========================================
+   PARTICLE BACKGROUND
+========================================= */
+
+.particle-field {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  opacity: 0.7;
+}
+
+
+/* Keep website above particles */
+
+.nav-wrap,
+main,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================
+   HERO DEPTH
+========================================= */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-copy,
+.hero-art,
+.profile-glow {
+  will-change: transform, opacity;
+}
+
+
+/* =========================================
+   SCROLL PROGRESS
+========================================= */
+
+.scroll-progress {
+  position: fixed;
+
+  top: 0;
+  right: 18px;
+
+  width: 2px;
+  height: 100vh;
+
+  transform-origin: top;
+
+  z-index: 100;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    #55aaff,
+    rgba(85, 170, 255, 0.05)
+  );
+
+  box-shadow:
+    0 0 12px rgba(85, 170, 255, 0.75),
+    0 0 30px rgba(85, 170, 255, 0.25);
+}
+
+
+/* =========================================
+   PHOTO
+========================================= */
+
+.profile-frame,
+.profile-image {
+  transform: rotate(0deg);
+}
+
+
+/* =========================================
+   PROJECT HOVER
+========================================= */
+
+.project {
+  will-change: transform;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.project:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(85, 170, 255, 0.38);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.32),
+    0 0 45px rgba(85, 170, 255, 0.08);
+}
+
+.project-link svg {
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover svg {
+  transform: translate(4px, -4px);
+}
+
+
+/* =========================================
+   BUTTON HOVER
+========================================= */
+
+.primary,
+.secondary {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.primary:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 40px rgba(85, 170, 255, 0.28);
+}
+
+.secondary:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(85, 170, 255, 0.35);
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.skill-card {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(85, 170, 255, 0.32);
+}
+
+
+/* =========================================
+   SOCIAL LINKS
+========================================= */
+
+.socials a {
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.socials a:hover {
+  transform: translateY(-3px);
+
+  color: #ffffff;
+
+  border-color: rgba(85, 170, 255, 0.35);
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .particle-field {
+    display: none;
+  }
+
+  .scroll-progress {
+    opacity: 0.35;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 620px) {
+
+  .scroll-progress {
+    right: 8px;
+    width: 1px;
+  }
+
+  .particle-field {
+    opacity: 0.4;
+  }
+}
+
+/* =========================================
+   NEURAL BACKGROUND LAYER
+========================================= */
+
+.neural-background {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.site {
+  position: relative;
+  min-height: 100vh;
+}

@@ -1,0 +1,587 @@
+/* =========================================
+   HERO INTRO
+   ========================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   HERO INTRO / LEFT SIDE
+   ========================================= */
+
+.hero-intro {
+  position: relative;
+  z-index: 4;
+
+  width: 100%;
+  min-height: auto;
+
+  margin: 0;
+  padding: 40px 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  font-family: "Manrope", sans-serif;
+}
+
+
+/* =========================================
+   HELLO I'M
+   ========================================= */
+
+.hero-intro-kicker {
+  display: block;
+
+  margin-bottom: 30px;
+
+  color: #66829f;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.30em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================
+   NAME
+   ========================================= */
+
+.hero-intro-name {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+
+  color: #edf5ff;
+
+  font-family: "Manrope", sans-serif;
+
+  /*
+    Large geometric display style
+  */
+
+  font-size: clamp(78px, 8.5vw, 132px);
+
+  font-weight: 800;
+
+  line-height: 0.79;
+
+  letter-spacing: -0.085em;
+
+  text-rendering: geometricPrecision;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-intro-name span {
+  display: block;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================
+   TITLE
+   ========================================= */
+
+.hero-intro-title {
+  margin: 48px 0 0;
+
+  color: #91abc5;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: clamp(25px, 2.5vw, 34px);
+
+  font-weight: 500;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================================
+   EDUCATION
+   ========================================= */
+
+.hero-intro-education {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px 18px;
+
+  margin-top: 21px;
+
+  color: #7189a2;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  line-height: 1.6;
+}
+
+.hero-intro-education span + span::before {
+  content: "·";
+
+  margin-right: 18px;
+
+  color: #4e6881;
+}
+
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.hero-intro-description {
+  max-width: 620px;
+
+  margin: 25px 0 0;
+
+  color: #8299b2;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  line-height: 1.75;
+
+  letter-spacing: -0.01em;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.hero-intro-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 34px;
+
+  font-family: "Manrope", sans-serif;
+}
+
+.hero-intro-actions .primary,
+.hero-intro-actions .secondary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+/* =========================================
+   RIGHT SIDE PHOTO
+========================================= */
+
+.hero-art {
+  min-height: 520px;
+
+  position: relative;
+
+  display: grid;
+
+  place-items: center;
+
+  z-index: 4;
+}
+
+
+/* =========================================
+   PHOTO FRAME
+========================================= */
+
+.profile-frame {
+  position: relative;
+
+  width: 390px;
+  height: 500px;
+
+  padding: 8px;
+
+  border: 1px solid
+    rgba(100, 177, 245, 0.28);
+
+  border-radius: 17px;
+
+  background: rgba(12, 28, 47, 0.65);
+
+  overflow: visible;
+
+  transform: rotate(0deg);
+
+  box-shadow:
+    0 0 0 1px
+      rgba(255, 255, 255, 0.025),
+    0 30px 80px
+      rgba(0, 0, 0, 0.45),
+    0 0 90px
+      rgba(52, 145, 232, 0.16);
+}
+
+
+/* =========================================
+   PHOTO
+========================================= */
+
+.profile-image {
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  border-radius: 11px;
+
+  filter:
+    saturate(0.92)
+    contrast(1.04)
+    brightness(0.97);
+
+  transition:
+    filter 0.35s ease,
+    transform 0.35s ease;
+
+  box-shadow:
+    inset 0 0 0 1px
+      rgba(255, 255, 255, 0.05);
+}
+
+
+/* =========================================
+   PHOTO HOVER
+========================================= */
+
+.profile-frame:hover
+.profile-image {
+  filter:
+    saturate(1)
+    contrast(1.05)
+    brightness(1);
+}
+
+
+/* =========================================
+   PHOTO GLOW
+========================================= */
+
+.profile-glow {
+  position: absolute;
+
+  z-index: 1;
+
+  inset: -30px;
+
+  border-radius: 30px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(85, 170, 255, 0.15),
+      transparent 60%
+    );
+
+  pointer-events: none;
+
+  filter: blur(20px);
+}
+
+
+/* =========================================
+   OUTER FRAME
+========================================= */
+
+.profile-frame::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -17px;
+
+  border:
+    1px solid
+    rgba(85, 170, 255, 0.08);
+
+  border-radius: 27px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   BLUE LIGHT DOT
+========================================= */
+
+.profile-frame::after {
+  content: "";
+
+  position: absolute;
+
+  width: 9px;
+  height: 9px;
+
+  right: -27px;
+  top: 43px;
+
+  border-radius: 50%;
+
+  background: #55aaff;
+
+  box-shadow:
+    0 0 18px
+      rgba(85, 170, 255, 0.85),
+    0 0 38px
+      rgba(85, 170, 255, 0.35);
+
+  animation:
+    floating-dot 3s ease-in-out infinite;
+}
+
+
+/* =========================================
+   ORBIT / CIRCLE BEHIND PHOTO
+========================================= */
+
+.hero-art::before {
+  content: "";
+
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  border:
+    1px solid
+    rgba(85, 170, 255, 0.075);
+
+  border-radius: 50%;
+
+  transform:
+    rotate(-20deg)
+    scaleX(0.72);
+
+  pointer-events: none;
+}
+
+.hero-art::after {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 280px;
+
+  border:
+    1px dashed
+    rgba(85, 170, 255, 0.055);
+
+  border-radius: 50%;
+
+  transform: rotate(35deg);
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes floating-dot {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .hero-intro-name {
+    font-size:
+      clamp(
+        64px,
+        9vw,
+        105px
+      );
+  }
+
+  .profile-frame {
+    width: 330px;
+    height: 430px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+
+  .hero-intro {
+    padding: 30px 0 0;
+  }
+
+  .hero-intro-name {
+    font-size:
+      clamp(
+        58px,
+        16vw,
+        88px
+      );
+
+    line-height: 0.82;
+  }
+
+  .hero-intro-title {
+    margin-top: 36px;
+
+    font-size: 23px;
+  }
+
+  .hero-intro-description {
+    font-size: 15px;
+  }
+
+  .hero-art {
+    min-height: 430px;
+  }
+
+  .profile-frame {
+    width: min(330px, 82vw);
+
+    height:
+      min(
+        425px,
+        108vw
+      );
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .hero-intro-kicker {
+    margin-bottom: 23px;
+
+    font-size: 10px;
+  }
+
+  .hero-intro-name {
+    font-size:
+      clamp(
+        54px,
+        17vw,
+        76px
+      );
+
+    line-height: 0.83;
+  }
+
+  .hero-intro-title {
+    font-size: 22px;
+  }
+
+  .hero-intro-education {
+    flex-direction: column;
+
+    gap: 2px;
+
+    font-size: 13px;
+  }
+
+  .hero-intro-education
+  span + span::before {
+    display: none;
+  }
+
+  .hero-intro-description {
+    margin-top: 20px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+  }
+
+  .hero-intro-actions {
+    flex-wrap: wrap;
+
+    margin-top: 28px;
+  }
+
+  .hero-art {
+    min-height: 390px;
+  }
+
+  .profile-frame {
+    width: 290px;
+    height: 375px;
+  }
+
+}

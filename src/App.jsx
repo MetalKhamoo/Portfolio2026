@@ -1,75 +1,138 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import NeuralBackground from "./components/NeuralBackground";
+import Lenis from "lenis";
 import { motion } from "framer-motion";
+
 import {
   ArrowUpRight,
   Github,
   Linkedin,
   Mail,
-  Download,
-  ExternalLink,
   BrainCircuit,
   Code2,
   Database,
   Server,
-  Smartphone,
   Menu,
   X,
   ChevronDown,
-  Sparkles,
   MapPin,
   GraduationCap,
   Terminal,
-  Cpu,
 } from "lucide-react";
 
-const GITHUB = "https://github.com/MetalKhamoo";
-const EMAIL = "mailto:pratham.deepak008.nmims.in";
-const LINKEDIN = "https://www.linkedin.com/";
+import useHeroParallax from "./hooks/useHeroParallax";
+import HeroEffects from "./components/HeroEffects";
+import ContactEnding from "./components/ContactEnding";
+import "./components/HeroIntro.css";
+
+/* =========================================
+   LINKS
+========================================= */
+
+const GITHUB =
+  "https://github.com/MetalKhamoo";
+
+const LINKEDIN =
+  "https://www.linkedin.com/in/pratham2704";
+
+const EMAIL =
+  "mailto:pratham.deepak.2704@gmail.com";
+
+/* =========================================
+   PROJECT DATA
+========================================= */
 
 const projects = [
   {
     number: "01",
     title: "Broke But Thriving",
-    type: "AI + Full-Stack",
+    type: "AI + FULL-STACK",
+
     description:
       "A personal finance management system combining predictive machine learning with an AI copilot for expense logging, simulations and personalized recommendations.",
-    stack: ["React", "FastAPI", "Python", "SQL", "LSTM", "ML"],
-    repo: "https://github.com/MetalKhamoo/BrokeButThriving",
+
+    stack: [
+      "React",
+      "FastAPI",
+      "Python",
+      "SQL",
+      "LSTM",
+      "ML",
+    ],
+
+    repo:
+      "https://github.com/MetalKhamoo/BrokeButThriving",
+
     featured: true,
   },
+
   {
     number: "02",
     title: "AI-driven CRM",
-    type: "AI + Frontend",
+    type: "AI + FRONTEND",
+
     description:
-      "A modern CRM application focused on turning customer information and workflows into a more intelligent, usable interface.",
-    stack: ["React", "TypeScript", "Vite", "React Query"],
-    repo: "https://github.com/MetalKhamoo/AI-driven-CRM",
+      "A modern CRM application focused on turning customer information and workflows into a more intelligent and usable interface.",
+
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "React Query",
+    ],
+
+    repo:
+      "https://github.com/MetalKhamoo/AI-driven-CRM",
   },
+
   {
     number: "03",
     title: "Placement Cell Management System",
-    type: "Full-Stack",
+    type: "FULL-STACK",
+
     description:
       "A role-based campus recruitment platform connecting students, administrators, HOD, principal and placement teams through centralized workflows.",
-    stack: ["PHP", "MySQL", "JavaScript", "Role-based Access"],
-    repo: "https://github.com/MetalKhamoo/PCMS",
+
+    stack: [
+      "PHP",
+      "MySQL",
+      "JavaScript",
+      "Role-based Access",
+    ],
+
+    repo:
+      "https://github.com/MetalKhamoo/PCMS",
   },
+
   {
     number: "04",
     title: "PawRescue",
-    type: "Android",
+    type: "ANDROID",
+
     description:
       "An Android application for reporting injured or stray animals with image uploads, location pinning and database-backed rescue workflows.",
-    stack: ["Java", "Android", "SQLite", "Google Maps API"],
-    repo: "https://github.com/MetalKhamoo/PawRescue",
+
+    stack: [
+      "Java",
+      "Android",
+      "SQLite",
+      "Google Maps API",
+    ],
+
+    repo:
+      "https://github.com/MetalKhamoo/PawRescue",
   },
 ];
+
+/* =========================================
+   SKILL DATA
+========================================= */
 
 const skills = [
   {
     icon: BrainCircuit,
     label: "AI / ML",
+
     items: [
       "Machine Learning",
       "TensorFlow",
@@ -78,150 +141,627 @@ const skills = [
       "Predictive Modeling",
     ],
   },
+
   {
     icon: Code2,
     label: "Languages",
-    items: ["Python", "Java", "C", "C++", "SQL", "JavaScript"],
+
+    items: [
+      "Python",
+      "Java",
+      "C",
+      "C++",
+      "SQL",
+      "JavaScript",
+    ],
   },
+
   {
     icon: Server,
     label: "Development",
-    items: ["React", "FastAPI", "PHP", "Android", "HTML", "CSS"],
+
+    items: [
+      "React",
+      "FastAPI",
+      "PHP",
+      "Android",
+      "HTML",
+      "CSS",
+    ],
   },
+
   {
     icon: Database,
     label: "Data",
-    items: ["MySQL", "PostgreSQL", "MongoDB", "SQLite", "Power BI", "Tableau"],
+
+    items: [
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "SQLite",
+      "Power BI",
+      "Tableau",
+    ],
   },
+
   {
     icon: Terminal,
     label: "Tools",
-    items: ["Git", "Docker", "VS Code", "Android Studio"],
+
+    items: [
+      "Git",
+      "Docker",
+      "VS Code",
+      "Android Studio",
+    ],
   },
 ];
 
+/* =========================================
+   PARTICLE FIELD
+========================================= */
+
+function ParticleField() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    let animationFrame;
+    let particles = [];
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const count = Math.min(
+        85,
+        Math.floor(
+          (window.innerWidth *
+            window.innerHeight) /
+            18000
+        )
+      );
+
+      particles = Array.from(
+        { length: count },
+        () => ({
+          x:
+            Math.random() *
+            canvas.width,
+
+          y:
+            Math.random() *
+            canvas.height,
+
+          vx:
+            (Math.random() - 0.5) *
+            0.18,
+
+          vy:
+            (Math.random() - 0.5) *
+            0.18,
+
+          size:
+            Math.random() *
+              1.6 +
+            0.4,
+        })
+      );
+    };
+
+    const draw = () => {
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      particles.forEach((p) => {
+        if (!reducedMotion) {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (
+            p.x < 0 ||
+            p.x > canvas.width
+          ) {
+            p.vx *= -1;
+          }
+
+          if (
+            p.y < 0 ||
+            p.y > canvas.height
+          ) {
+            p.vy *= -1;
+          }
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+          p.x,
+          p.y,
+          p.size,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle =
+          "rgba(85, 170, 255, 0.55)";
+
+        ctx.fill();
+      });
+
+      for (
+        let i = 0;
+        i < particles.length;
+        i++
+      ) {
+        for (
+          let j = i + 1;
+          j < particles.length;
+          j++
+        ) {
+          const dx =
+            particles[i].x -
+            particles[j].x;
+
+          const dy =
+            particles[i].y -
+            particles[j].y;
+
+          const distance =
+            Math.sqrt(
+              dx * dx +
+                dy * dy
+            );
+
+          if (distance < 135) {
+            const opacity =
+              (1 -
+                distance / 135) *
+              0.13;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+              particles[i].x,
+              particles[i].y
+            );
+
+            ctx.lineTo(
+              particles[j].x,
+              particles[j].y
+            );
+
+            ctx.strokeStyle =
+              `rgba(85, 170, 255, ${opacity})`;
+
+            ctx.lineWidth = 0.6;
+
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationFrame =
+        requestAnimationFrame(draw);
+    };
+
+    resize();
+    draw();
+
+    window.addEventListener(
+      "resize",
+      resize
+    );
+
+    return () => {
+      cancelAnimationFrame(
+        animationFrame
+      );
+
+      window.removeEventListener(
+        "resize",
+        resize
+      );
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="particle-field"
+    />
+  );
+}
+
+/* =========================================
+   APP
+========================================= */
+
 function App() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] =
+    useState(false);
+
+  const heroRef =
+    useRef(null);
+
+  /* =========================================
+     LENIS
+  ========================================= */
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.15,
+      smoothWheel: true,
+      autoRaf: true,
+    });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  /* =========================================
+     HERO PARALLAX
+  ========================================= */
+
+  const {
+    scrollYProgress,
+    backgroundY,
+    networkY,
+    photoY,
+    photoScale,
+    textY,
+    textOpacity,
+    glowScale,
+    glowOpacity,
+  } = useHeroParallax(heroRef);
+
+  /* =========================================
+     SCROLL FUNCTION
+  ========================================= */
 
   const scrollTo = (id) => {
     document
       .getElementById(id)
-      ?.scrollIntoView({ behavior: "smooth" });
+      ?.scrollIntoView({
+        behavior: "smooth",
+      });
 
     setOpen(false);
   };
 
+  /* =========================================
+     RENDER
+  ========================================= */
+
   return (
     <div className="site">
+
+      {/* Neural background */}
+
+      <NeuralBackground />
+
+      {/* Particle background */}
+
+      <ParticleField />
+
+      {/* Noise */}
+
       <div className="noise" />
 
+      {/* Scroll progress */}
+
+      <motion.div
+        className="scroll-progress"
+        style={{
+          scaleY:
+            scrollYProgress,
+        }}
+      />
+
+      {/* =====================================
+          NAVIGATION
+      ===================================== */}
+
       <header className="nav-wrap">
+
         <nav className="nav">
+
+          {/* Logo */}
+
           <button
             className="brand"
-            onClick={() => scrollTo("home")}
+            onClick={() =>
+              scrollTo("home")
+            }
             aria-label="Go home"
           >
             PD<span>.</span>
           </button>
 
-          <div className={`nav-links ${open ? "show" : ""}`}>
-            <button onClick={() => scrollTo("work")}>Work</button>
-            <button onClick={() => scrollTo("about")}>About</button>
-            <button onClick={() => scrollTo("skills")}>Skills</button>
-            <button onClick={() => scrollTo("contact")}>Contact</button>
+          {/* Desktop / mobile links */}
+
+          <div
+            className={`nav-links ${
+              open ? "show" : ""
+            }`}
+          >
+
+            <button
+              onClick={() =>
+                scrollTo("home")
+              }
+            >
+              Home
+            </button>
+
+            <button
+              onClick={() =>
+                scrollTo("work")
+              }
+            >
+              Work
+            </button>
+
+            <button
+              onClick={() =>
+                scrollTo("about")
+              }
+            >
+              About
+            </button>
+
+            <button
+              onClick={() =>
+                scrollTo("skills")
+              }
+            >
+              Skills
+            </button>
+
+            <button
+              onClick={() =>
+                scrollTo("contact")
+              }
+            >
+              Contact
+            </button>
 
             <a
               href={GITHUB}
               target="_blank"
               rel="noreferrer"
             >
-              GitHub <ArrowUpRight size={13} />
+              GitHub
+              <ArrowUpRight
+                size={13}
+              />
             </a>
+
           </div>
+
+          {/* Mobile menu */}
 
           <button
             className="menu"
-            onClick={() => setOpen(!open)}
+            onClick={() =>
+              setOpen(!open)
+            }
             aria-label="Toggle menu"
           >
-            {open ? <X /> : <Menu />}
+            {open ? (
+              <X />
+            ) : (
+              <Menu />
+            )}
           </button>
+
         </nav>
+
       </header>
 
       <main>
-        <section id="home" className="hero section">
+
+        {/* =====================================
+            HERO
+        ===================================== */}
+
+        <section
+          id="home"
+          className="hero section"
+          ref={heroRef}
+        >
+
+          {/* Hero background effects */}
+
+          <HeroEffects
+            backgroundY={
+              backgroundY
+            }
+            networkY={
+              networkY
+            }
+            glowScale={
+              glowScale
+            }
+            glowOpacity={
+              glowOpacity
+            }
+          />
+
+          {/* ===================================
+              HERO GRID
+          =================================== */}
+
           <div className="hero-grid">
 
+            {/* =================================
+                LEFT SIDE
+            ================================= */}
+
             <motion.div
-              className="hero-copy"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
+              className="hero-intro"
+              style={{
+                y: textY,
+                opacity:
+                  textOpacity,
+              }}
+              initial={{
+                opacity: 0,
+                y: 35,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.9,
+                ease: "easeOut",
+              }}
             >
-              <div className="eyebrow">
-                <span className="pulse" />
-                AVAILABLE FOR INTERNSHIPS
-              </div>
 
-              <p className="kicker">
-                AI & DATA SCIENCE / SOFTWARE ENGINEERING
-              </p>
+              {/* Greeting */}
 
-              <h1>
-                Building software
-                <br />
-                <em>with intelligence.</em>
+              <span className="hero-intro-kicker">
+                HELLO, I'M
+              </span>
+
+              {/* Name */}
+
+              <h1 className="hero-intro-name">
+
+                <span>
+                  Pratham
+                </span>
+
+                <span>
+                  Deepak
+                </span>
+
               </h1>
 
-              <p className="hero-text">
-                I'm Pratham Deepak, a B.Tech AI & Data Science student at NMIMS
-                Navi Mumbai. I enjoy turning machine learning ideas into usable
-                software and real-world systems.
+              {/* Main title */}
+
+              <p className="hero-intro-title">
+                Building Intelligent
+                Systems
               </p>
 
-              <div className="hero-actions">
+              {/* Education */}
+
+              <div className="hero-intro-education">
+
+                <span>
+                  B.Tech Artificial
+                  Intelligence &
+                  Data Science
+                </span>
+
+                <span>
+                  NMIMS Navi Mumbai
+                  · 2027
+                </span>
+
+              </div>
+
+              {/* Description */}
+
+              <p className="hero-intro-description">
+                I enjoy building
+                intelligent
+                applications,
+                exploring machine
+                learning, and
+                creating software
+                that turns ideas
+                into practical
+                solutions.
+              </p>
+
+              {/* Buttons */}
+
+              <div className="hero-intro-actions">
+
                 <button
                   className="primary"
-                  onClick={() => scrollTo("work")}
+                  onClick={() =>
+                    scrollTo("work")
+                  }
                 >
-                  Explore my work
-                  <ArrowUpRight size={17} />
+                  Explore My Work
+
+                  <ArrowUpRight
+                    size={17}
+                  />
                 </button>
 
-                <a
+                <button
                   className="secondary"
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
+                  onClick={() =>
+                    scrollTo("about")
+                  }
                 >
-                  Resume
-                  <Download size={16} />
-                </a>
+                  About Me
+                </button>
+
               </div>
 
-              <div className="hero-meta">
-                <span>
-                  <MapPin size={15} />
-                  Navi Mumbai, India
-                </span>
-
-                <span>
-                  <GraduationCap size={15} />
-                  B.Tech · 2027
-                </span>
-              </div>
             </motion.div>
+
+            {/* =================================
+                RIGHT SIDE PHOTO
+            ================================= */}
 
             <motion.div
               className="hero-art"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              style={{
+                y: photoY,
+                scale:
+                  photoScale,
+              }}
+              initial={{
+                opacity: 0,
+                x: 45,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{
+                duration: 1,
+                delay: 0.15,
+                ease: "easeOut",
+              }}
             >
+
               <div className="profile-frame">
-                <div className="profile-glow" />
+
+                {/* Glow */}
+
+                <motion.div
+                  className="profile-glow"
+                  style={{
+                    scale:
+                      glowScale,
+                    opacity:
+                      glowOpacity,
+                  }}
+                />
+
+                {/* YOUR PHOTO */}
 
                 <img
                   src="/profile.jpg"
@@ -229,175 +769,94 @@ function App() {
                   className="profile-image"
                 />
 
-                <div className="profile-tag tag-ai">
-                  AI
-                </div>
-
-                <div className="profile-tag tag-ml">
-                  ML
-                </div>
-
-                <div className="profile-tag tag-dev">
-                  SOFTWARE
-                </div>
               </div>
+
             </motion.div>
 
           </div>
 
-          <button
+          {/* ===================================
+              SCROLL CUE
+          =================================== */}
+
+          <motion.button
             className="scroll-cue"
-            onClick={() => scrollTo("work")}
+            onClick={() =>
+              scrollTo("work")
+            }
+            animate={{
+              y: [0, 7, 0],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           >
-            <span>SCROLL TO EXPLORE</span>
-            <ChevronDown size={17} />
-          </button>
+
+            <span>
+              SCROLL TO EXPLORE
+            </span>
+
+            <ChevronDown
+              size={17}
+            />
+
+          </motion.button>
+
         </section>
 
-        <section id="work" className="section work">
+        {/* =====================================
+            SELECTED WORK
+        ===================================== */}
+
+        <section
+          id="work"
+          className="section work"
+        >
+
           <div className="section-head">
+
             <div>
+
               <span className="section-index">
                 01 / SELECTED WORK
               </span>
 
-              <h2>Things I've built.</h2>
+              <h2>
+                Things I've built.
+              </h2>
+
             </div>
 
             <p>
-              Projects where software, data and problem-solving meet.
+              Projects where
+              software, data and
+              problem-solving meet.
             </p>
+
           </div>
 
           <div className="projects">
-            {projects.map((p, i) => (
-              <motion.article
-                className={`project ${p.featured ? "featured" : ""}`}
-                key={p.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{
-                  once: true,
-                  margin: "-70px",
-                }}
-                transition={{
-                  duration: 0.55,
-                  delay: i * 0.06,
-                }}
-              >
-                <div className="project-top">
-                  <span className="project-number">
-                    {p.number}
-                  </span>
 
-                  <span className="project-type">
-                    {p.type}
-                  </span>
-                </div>
+            {projects.map(
+              (
+                project,
+                index
+              ) => (
 
-                <div className="project-body">
-                  <div>
-                    <h3>{p.title}</h3>
-
-                    <p>
-                      {p.description}
-                    </p>
-                  </div>
-
-                  <a
-                    className="project-link"
-                    href={p.repo}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    View repository
-                    <ArrowUpRight size={17} />
-                  </a>
-                </div>
-
-                <div className="tags">
-                  {p.stack.map((s) => (
-                    <span key={s}>
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </section>
-
-        <section id="about" className="section about">
-          <div className="about-left">
-            <span className="section-index">
-              02 / ABOUT
-            </span>
-
-            <h2>
-              A student who likes building beyond the classroom.
-            </h2>
-          </div>
-
-          <div className="about-right">
-            <p className="large">
-              My focus sits at the intersection of{" "}
-              <strong>
-                AI, data and software engineering
-              </strong>
-              . I like taking an idea from a problem statement to a working
-              application.
-            </p>
-
-            <p>
-              At NMIMS, I've worked on machine-learning systems,
-              full-stack applications, Android development and
-              database-backed platforms. Outside code, I've also led
-              student teams and institute communications.
-            </p>
-
-            <div className="facts">
-              <div>
-                <b>2027</b>
-                <span>Expected graduation</span>
-              </div>
-
-              <div>
-                <b>NMIMS</b>
-                <span>
-                  School of Technology, Management & Engineering
-                </span>
-              </div>
-
-              <div>
-                <b>AI + SWE</b>
-                <span>Current direction</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="skills" className="section skills">
-          <div className="section-head">
-            <div>
-              <span className="section-index">
-                03 / TOOLKIT
-              </span>
-
-              <h2>What I work with.</h2>
-            </div>
-          </div>
-
-          <div className="skill-grid">
-            {skills.map((group, i) => {
-              const Icon = group.icon;
-
-              return (
-                <motion.div
-                  className="skill-card"
-                  key={group.label}
+                <motion.article
+                  className={`project ${
+                    project.featured
+                      ? "featured"
+                      : ""
+                  }`}
+                  key={
+                    project.title
+                  }
                   initial={{
                     opacity: 0,
-                    y: 18,
+                    y: 60,
                   }}
                   whileInView={{
                     opacity: 1,
@@ -405,158 +864,476 @@ function App() {
                   }}
                   viewport={{
                     once: true,
+                    margin:
+                      "-100px",
                   }}
                   transition={{
-                    delay: i * 0.05,
+                    duration: 0.7,
+                    delay:
+                      index * 0.1,
+                    ease:
+                      "easeOut",
                   }}
                 >
-                  <Icon size={21} />
 
-                  <h3>
-                    {group.label}
-                  </h3>
+                  <div className="project-top">
 
-                  <div className="skill-list">
-                    {group.items.map((item) => (
-                      <span key={item}>
-                        {item}
-                      </span>
-                    ))}
+                    <span className="project-number">
+                      {
+                        project.number
+                      }
+                    </span>
+
+                    <span className="project-type">
+                      {
+                        project.type
+                      }
+                    </span>
+
                   </div>
-                </motion.div>
-              );
-            })}
+
+                  <div className="project-body">
+
+                    <div>
+
+                      <h3>
+                        {
+                          project.title
+                        }
+                      </h3>
+
+                      <p>
+                        {
+                          project.description
+                        }
+                      </p>
+
+                    </div>
+
+                    <a
+                      className="project-link"
+                      href={
+                        project.repo
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View repository
+
+                      <ArrowUpRight
+                        size={17}
+                      />
+
+                    </a>
+
+                  </div>
+
+                  <div className="tags">
+
+                    {project.stack.map(
+                      (tech) => (
+
+                        <span
+                          key={tech}
+                        >
+                          {tech}
+                        </span>
+
+                      )
+                    )}
+
+                  </div>
+
+                </motion.article>
+
+              )
+            )}
+
           </div>
+
         </section>
 
-        <section className="section leadership">
+        {/* =====================================
+            WHY I BUILD
+        ===================================== */}
+
+        <section
+          id="about"
+          className="section about"
+        >
+
+          <div className="about-left">
+
+            <span className="section-index">
+              02 / WHY I BUILD
+            </span>
+
+            <h2>
+              Building beyond
+              <br />
+              the classroom.
+            </h2>
+
+          </div>
+
+          <div className="about-right">
+
+            <p className="large">
+
+              My focus sits at
+              the intersection
+              of{" "}
+
+              <strong>
+                AI, data and
+                software
+                engineering
+              </strong>
+              .
+
+              I like taking an
+              idea from a
+              problem statement
+              to a working
+              application.
+
+            </p>
+
+            <p>
+              At NMIMS, I've
+              worked on
+              machine-learning
+              systems,
+              full-stack
+              applications,
+              Android
+              development and
+              database-backed
+              platforms. Outside
+              code, I've also
+              led student teams
+              and institute
+              communications.
+            </p>
+
+            <div className="facts">
+
+              <div>
+
+                <b>
+                  2027
+                </b>
+
+                <span>
+                  Expected
+                  graduation
+                </span>
+
+              </div>
+
+              <div>
+
+                <b>
+                  NMIMS
+                </b>
+
+                <span>
+                  School of
+                  Technology,
+                  Management &
+                  Engineering
+                </span>
+
+              </div>
+
+              <div>
+
+                <b>
+                  AI + SWE
+                </b>
+
+                <span>
+                  Current
+                  direction
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        {/* =====================================
+            TOOLKIT
+        ===================================== */}
+
+        <section
+          id="skills"
+          className="section skills"
+        >
+
           <div className="section-head">
+
             <div>
+
+              <span className="section-index">
+                03 / TOOLKIT
+              </span>
+
+              <h2>
+                What I work with.
+              </h2>
+
+            </div>
+
+          </div>
+
+          <div className="skill-grid">
+
+            {skills.map(
+              (
+                group,
+                index
+              ) => {
+
+                const Icon =
+                  group.icon;
+
+                return (
+
+                  <motion.div
+                    className="skill-card"
+                    key={
+                      group.label
+                    }
+                    initial={{
+                      opacity: 0,
+                      y: 35,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{
+                      once: true,
+                      margin:
+                        "-80px",
+                    }}
+                    transition={{
+                      duration:
+                        0.55,
+                      delay:
+                        index * 0.08,
+                    }}
+                  >
+
+                    <Icon
+                      size={21}
+                    />
+
+                    <h3>
+                      {
+                        group.label
+                      }
+                    </h3>
+
+                    <div className="skill-list">
+
+                      {group.items.map(
+                        (item) => (
+
+                          <span
+                            key={
+                              item
+                            }
+                          >
+                            {item}
+                          </span>
+
+                        )
+                      )}
+
+                    </div>
+
+                  </motion.div>
+
+                );
+              }
+            )}
+
+          </div>
+
+        </section>
+
+        {/* =====================================
+            LEADERSHIP
+        ===================================== */}
+
+        <section className="section leadership">
+
+          <div className="section-head">
+
+            <div>
+
               <span className="section-index">
                 04 / BEYOND CODE
               </span>
 
               <h2>
-                Leadership & involvement.
+                Leadership &
+                involvement.
               </h2>
+
             </div>
+
           </div>
 
           <div className="timeline">
-            <div className="timeline-item">
+
+            {/* PR HEAD */}
+
+            <motion.div
+              className="timeline-item"
+              initial={{
+                opacity: 0,
+                x: -30,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+            >
+
               <span>
                 2025 — 2026
               </span>
 
               <div>
+
                 <h3>
-                  Head · Public Relations, STME
+                  Head · Public
+                  Relations, STME
                 </h3>
 
                 <p>
-                  Led campaigns for institute events, managed a team
-                  and ensured timely delivery.
+                  Led campaigns
+                  for institute
+                  events, managed
+                  a team and
+                  ensured timely
+                  delivery.
                 </p>
+
               </div>
-            </div>
 
-            <div className="timeline-item">
-              <span>
-                2024 — 2025
-              </span>
+            </motion.div>
 
-              <div>
-                <h3>
-                  Photography Head · Public Relations, STME
-                </h3>
+            {/* PHOTOGRAPHY */}
 
-                <p>
-                  Led event photography and visual documentation for
-                  reports, promotions and social media.
-                </p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <span>
-                2024 — 2025
-              </span>
-
-              <div>
-                <h3>
-                  Sports Joint Director · Rotaract
-                </h3>
-
-                <p>
-                  Helped organize fundraising and community events.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="section contact">
-          <div className="contact-card">
-            <Sparkles size={22} />
-
-            <span className="section-index">
-              05 / LET'S CONNECT
-            </span>
-
-            <h2>
-              Have a problem worth building?
-            </h2>
-
-            <p>
-              I'm open to technical internships, collaborative projects
-              and opportunities to learn by building.
-            </p>
-
-            <a
-              className="contact-email"
-              href={EMAIL}
+            <motion.div
+              className="timeline-item"
+              initial={{
+                opacity: 0,
+                x: -30,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.1,
+              }}
             >
-              pratham.deepak008.nmims.in
-              <ArrowUpRight size={18} />
-            </a>
 
-            <div className="socials">
-              <a
-                href={GITHUB}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Github size={17} />
-                GitHub
-              </a>
+              <span>
+                2024 — 2025
+              </span>
 
-              <a
-                href={LINKEDIN}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Linkedin size={17} />
-                LinkedIn
-              </a>
+              <div>
 
-              <a href={EMAIL}>
-                <Mail size={17} />
-                Email
-              </a>
-            </div>
+                <h3>
+                  Photography Head ·
+                  Public Relations,
+                  STME
+                </h3>
+
+                <p>
+                  Led event
+                  photography and
+                  visual
+                  documentation
+                  for reports,
+                  promotions and
+                  social media.
+                </p>
+
+              </div>
+
+            </motion.div>
+
+            {/* ROTARACT */}
+
+            <motion.div
+              className="timeline-item"
+              initial={{
+                opacity: 0,
+                x: -30,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: 0.2,
+              }}
+            >
+
+              <span>
+                2024 — 2025
+              </span>
+
+              <div>
+
+                <h3>
+                  Sports Joint
+                  Director ·
+                  Rotaract
+                </h3>
+
+                <p>
+                  Helped organize
+                  fundraising and
+                  community
+                  events.
+                </p>
+
+              </div>
+
+            </motion.div>
+
           </div>
+
         </section>
+
+        {/* =====================================
+            CONTACT
+        ===================================== */}
+
+        <ContactEnding />
+
       </main>
 
-      <footer>
-        <span>
-          PRATHAM DEEPAK © 2026
-        </span>
-
-        <span>
-          BUILT FOR THE WEB · DEPLOY ON VERCEL
-        </span>
-      </footer>
     </div>
   );
 }

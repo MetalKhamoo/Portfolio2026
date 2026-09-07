@@ -1,0 +1,224 @@
+/* =========================================
+   CONTACT ENDING
+   ========================================= */
+
+.contact-ending {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 40px;
+  border-top: 1px solid rgba(150, 190, 230, 0.13);
+  background:
+    radial-gradient(
+      circle at 50% 28%,
+      rgba(85, 170, 255, 0.055),
+      transparent 34%
+    ),
+    #07101d;
+  overflow: hidden;
+}
+
+.contact-ending-inner {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 86px 0 70px;
+  text-align: center;
+}
+
+.contact-ending-label {
+  display: block;
+  margin-bottom: 26px;
+  color: #5f7892;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+.contact-ending h2 {
+  margin: 0;
+  color: #edf5ff;
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+.contact-ending h2 em {
+  color: #dcecff;
+  font-style: normal;
+}
+
+.contact-ending-text {
+  max-width: 620px;
+  margin: 30px auto 0;
+  color: #8197af;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.contact-ending-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 42px;
+  color: #63b5ff;
+  font-size: clamp(20px, 2.2vw, 25px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-ending-email:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.contact-ending-email svg {
+  transition: transform 0.25s ease;
+}
+
+.contact-ending-email:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.contact-ending-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 42px;
+}
+
+.contact-ending-socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #8296ab;
+  font-size: 14px;
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-ending-socials a:hover {
+  color: #edf5ff;
+  transform: translateY(-2px);
+}
+
+.contact-ending-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  width: 100%;
+  padding: 36px max(7vw, 28px);
+  border-top: 1px solid rgba(150, 190, 230, 0.13);
+  background: rgba(7, 16, 29, 0.5);
+}
+
+.contact-ending-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-ending-footer-left strong {
+  color: #5d7690;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+}
+
+.contact-ending-footer-left span,
+.contact-ending-footer-right span {
+  color: #536b82;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.contact-ending-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.contact-ending-footer-right button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #536b82;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.contact-ending-footer-right button:hover {
+  color: #edf5ff;
+}
+
+@media (max-width: 700px) {
+  .contact-ending {
+    min-height: 600px;
+  }
+
+  .contact-ending-inner {
+    padding: 72px 0 58px;
+  }
+
+  .contact-ending h2 {
+    font-size: clamp(38px, 11vw, 52px);
+  }
+
+  .contact-ending-text {
+    font-size: 15px;
+  }
+
+  .contact-ending-email {
+    font-size: 19px;
+  }
+
+  .contact-ending-socials {
+    gap: 20px;
+  }
+
+  .contact-ending-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 24px;
+  }
+
+  .contact-ending-footer-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 440px) {
+  .contact-ending-inner {
+    width: min(100% - 30px, 760px);
+  }
+
+  .contact-ending-socials {
+    flex-wrap: wrap;
+  }
+
+  .contact-ending-email {
+    font-size: 17px;
+  }
+
+  .contact-ending-footer-right {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

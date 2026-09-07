@@ -1,0 +1,176 @@
+/* =========================================
+   HERO DEPTH EFFECTS
+========================================= */
+
+.hero-effects {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* =========================================
+   ATMOSPHERIC GLOW
+========================================= */
+
+.hero-depth-glow {
+  position: absolute;
+
+  width: 750px;
+  height: 750px;
+
+  right: -170px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(40, 135, 230, 0.11),
+      rgba(40, 135, 230, 0.035) 35%,
+      transparent 68%
+    );
+
+  filter: blur(8px);
+}
+
+
+/* =========================================
+   ORBITS
+========================================= */
+
+.hero-orbit {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* Main orbit */
+
+.hero-orbit-one {
+  width: 650px;
+  height: 650px;
+
+  right: -60px;
+  top: 50%;
+
+  transform:
+    translateY(-50%)
+    rotate(-20deg)
+    scaleX(0.7);
+
+  border:
+    1px solid rgba(85, 170, 255, 0.075);
+}
+
+
+/* Secondary orbit */
+
+.hero-orbit-two {
+  width: 760px;
+  height: 360px;
+
+  right: -100px;
+  top: 52%;
+
+  transform:
+    translateY(-50%)
+    rotate(28deg);
+
+  border:
+    1px dashed rgba(85, 170, 255, 0.055);
+}
+
+
+/* =========================================
+   PHOTO GLOW
+========================================= */
+
+.hero-photo-glow {
+  position: absolute;
+
+  width: 430px;
+  height: 520px;
+
+  right: 8%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(50, 145, 235, 0.16),
+      rgba(50, 145, 235, 0.045) 45%,
+      transparent 72%
+    );
+
+  filter: blur(30px);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .hero-orbit-one {
+    width: 520px;
+    height: 520px;
+
+    right: -180px;
+  }
+
+  .hero-orbit-two {
+    width: 600px;
+    right: -200px;
+  }
+
+  .hero-photo-glow {
+    right: -80px;
+  }
+}
+
+
+@media (max-width: 620px) {
+
+  .hero-depth-glow {
+    width: 500px;
+    height: 500px;
+
+    right: -220px;
+  }
+
+  .hero-orbit-one {
+    width: 400px;
+    height: 400px;
+
+    right: -180px;
+  }
+
+  .hero-orbit-two {
+    display: none;
+  }
+
+  .hero-photo-glow {
+    width: 300px;
+    height: 400px;
+
+    right: -100px;
+  }
+}
