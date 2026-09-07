@@ -25,6 +25,7 @@ import HeroEffects from "./components/HeroEffects";
 import ContactEnding from "./components/ContactEnding";
 import "./components/HeroIntro.css";
 
+
 /* =========================================
    LINKS
 ========================================= */
@@ -37,6 +38,7 @@ const LINKEDIN =
 
 const EMAIL =
   "mailto:pratham.deepak.2704@gmail.com";
+
 
 /* =========================================
    PROJECT DATA
@@ -124,6 +126,7 @@ const projects = [
   },
 ];
 
+
 /* =========================================
    SKILL DATA
 ========================================= */
@@ -196,6 +199,7 @@ const skills = [
     ],
   },
 ];
+
 
 /* =========================================
    PARTICLE FIELD
@@ -386,6 +390,7 @@ function ParticleField() {
   );
 }
 
+
 /* =========================================
    APP
 ========================================= */
@@ -397,8 +402,9 @@ function App() {
   const heroRef =
     useRef(null);
 
+
   /* =========================================
-     LENIS
+     LENIS SMOOTH SCROLL
   ========================================= */
 
   useEffect(() => {
@@ -412,6 +418,7 @@ function App() {
       lenis.destroy();
     };
   }, []);
+
 
   /* =========================================
      HERO PARALLAX
@@ -429,6 +436,7 @@ function App() {
     glowOpacity,
   } = useHeroParallax(heroRef);
 
+
   /* =========================================
      SCROLL FUNCTION
   ========================================= */
@@ -443,9 +451,6 @@ function App() {
     setOpen(false);
   };
 
-  /* =========================================
-     RENDER
-  ========================================= */
 
   return (
     <div className="site">
@@ -472,6 +477,7 @@ function App() {
         }}
       />
 
+
       {/* =====================================
           NAVIGATION
       ===================================== */}
@@ -492,7 +498,8 @@ function App() {
             PD<span>.</span>
           </button>
 
-          {/* Desktop / mobile links */}
+
+          {/* Navigation links */}
 
           <div
             className={`nav-links ${
@@ -546,12 +553,14 @@ function App() {
               rel="noreferrer"
             >
               GitHub
+
               <ArrowUpRight
                 size={13}
               />
             </a>
 
           </div>
+
 
           {/* Mobile menu */}
 
@@ -573,10 +582,12 @@ function App() {
 
       </header>
 
+
       <main>
 
+
         {/* =====================================
-            HERO
+            HERO / INTRO
         ===================================== */}
 
         <section
@@ -584,8 +595,6 @@ function App() {
           className="hero section"
           ref={heroRef}
         >
-
-          {/* Hero background effects */}
 
           <HeroEffects
             backgroundY={
@@ -602,11 +611,9 @@ function App() {
             }
           />
 
-          {/* ===================================
-              HERO GRID
-          =================================== */}
 
           <div className="hero-grid">
+
 
             {/* =================================
                 LEFT SIDE
@@ -633,13 +640,10 @@ function App() {
               }}
             >
 
-              {/* Greeting */}
-
               <span className="hero-intro-kicker">
                 HELLO, I'M
               </span>
 
-              {/* Name */}
 
               <h1 className="hero-intro-name">
 
@@ -653,14 +657,12 @@ function App() {
 
               </h1>
 
-              {/* Main title */}
 
               <p className="hero-intro-title">
                 Building Intelligent
                 Systems
               </p>
 
-              {/* Education */}
 
               <div className="hero-intro-education">
 
@@ -677,7 +679,6 @@ function App() {
 
               </div>
 
-              {/* Description */}
 
               <p className="hero-intro-description">
                 I enjoy building
@@ -691,7 +692,6 @@ function App() {
                 solutions.
               </p>
 
-              {/* Buttons */}
 
               <div className="hero-intro-actions">
 
@@ -708,6 +708,7 @@ function App() {
                   />
                 </button>
 
+
                 <button
                   className="secondary"
                   onClick={() =>
@@ -720,6 +721,7 @@ function App() {
               </div>
 
             </motion.div>
+
 
             {/* =================================
                 RIGHT SIDE PHOTO
@@ -749,8 +751,6 @@ function App() {
 
               <div className="profile-frame">
 
-                {/* Glow */}
-
                 <motion.div
                   className="profile-glow"
                   style={{
@@ -761,7 +761,6 @@ function App() {
                   }}
                 />
 
-                {/* YOUR PHOTO */}
 
                 <img
                   src="/profile.jpg"
@@ -775,14 +774,13 @@ function App() {
 
           </div>
 
-          {/* ===================================
-              SCROLL CUE
-          =================================== */}
+
+          {/* Scroll cue */}
 
           <motion.button
             className="scroll-cue"
             onClick={() =>
-              scrollTo("work")
+              scrollTo("about")
             }
             animate={{
               y: [0, 7, 0],
@@ -806,9 +804,128 @@ function App() {
 
         </section>
 
-        {/* =====================================
-            SELECTED WORK
-        ===================================== */}
+
+        {/* =====================================================
+            01 / WHY I BUILD
+        ===================================================== */}
+
+        <section
+          id="about"
+          className="section about"
+        >
+
+          <div className="about-left">
+
+            <span className="section-index">
+              01 / WHY I BUILD
+            </span>
+
+            <h2>
+              Building beyond
+              <br />
+              the classroom.
+            </h2>
+
+          </div>
+
+
+          <div className="about-right">
+
+            <p className="large">
+
+              My focus sits at
+              the intersection
+              of{" "}
+
+              <strong>
+                AI, data and
+                software
+                engineering
+              </strong>
+              .
+
+              I like taking an
+              idea from a
+              problem statement
+              to a working
+              application.
+
+            </p>
+
+
+            <p>
+              At NMIMS, I've
+              worked on
+              machine-learning
+              systems,
+              full-stack
+              applications,
+              Android
+              development and
+              database-backed
+              platforms. Outside
+              code, I've also
+              led student teams
+              and institute
+              communications.
+            </p>
+
+
+            <div className="facts">
+
+              <div>
+
+                <b>
+                  2027
+                </b>
+
+                <span>
+                  Expected
+                  graduation
+                </span>
+
+              </div>
+
+
+              <div>
+
+                <b>
+                  NMIMS
+                </b>
+
+                <span>
+                  School of
+                  Technology,
+                  Management &
+                  Engineering
+                </span>
+
+              </div>
+
+
+              <div>
+
+                <b>
+                  AI + SWE
+                </b>
+
+                <span>
+                  Current
+                  direction
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* =====================================================
+            02 / SELECTED WORK
+        ===================================================== */}
 
         <section
           id="work"
@@ -820,7 +937,7 @@ function App() {
             <div>
 
               <span className="section-index">
-                01 / SELECTED WORK
+                02 / SELECTED WORK
               </span>
 
               <h2>
@@ -829,6 +946,7 @@ function App() {
 
             </div>
 
+
             <p>
               Projects where
               software, data and
@@ -836,6 +954,7 @@ function App() {
             </p>
 
           </div>
+
 
           <div className="projects">
 
@@ -854,19 +973,23 @@ function App() {
                   key={
                     project.title
                   }
+
                   initial={{
                     opacity: 0,
                     y: 60,
                   }}
+
                   whileInView={{
                     opacity: 1,
                     y: 0,
                   }}
+
                   viewport={{
                     once: true,
                     margin:
                       "-100px",
                   }}
+
                   transition={{
                     duration: 0.7,
                     delay:
@@ -892,6 +1015,7 @@ function App() {
 
                   </div>
 
+
                   <div className="project-body">
 
                     <div>
@@ -910,6 +1034,7 @@ function App() {
 
                     </div>
 
+
                     <a
                       className="project-link"
                       href={
@@ -927,6 +1052,7 @@ function App() {
                     </a>
 
                   </div>
+
 
                   <div className="tags">
 
@@ -953,121 +1079,10 @@ function App() {
 
         </section>
 
-        {/* =====================================
-            WHY I BUILD
-        ===================================== */}
 
-        <section
-          id="about"
-          className="section about"
-        >
-
-          <div className="about-left">
-
-            <span className="section-index">
-              02 / WHY I BUILD
-            </span>
-
-            <h2>
-              Building beyond
-              <br />
-              the classroom.
-            </h2>
-
-          </div>
-
-          <div className="about-right">
-
-            <p className="large">
-
-              My focus sits at
-              the intersection
-              of{" "}
-
-              <strong>
-                AI, data and
-                software
-                engineering
-              </strong>
-              .
-
-              I like taking an
-              idea from a
-              problem statement
-              to a working
-              application.
-
-            </p>
-
-            <p>
-              At NMIMS, I've
-              worked on
-              machine-learning
-              systems,
-              full-stack
-              applications,
-              Android
-              development and
-              database-backed
-              platforms. Outside
-              code, I've also
-              led student teams
-              and institute
-              communications.
-            </p>
-
-            <div className="facts">
-
-              <div>
-
-                <b>
-                  2027
-                </b>
-
-                <span>
-                  Expected
-                  graduation
-                </span>
-
-              </div>
-
-              <div>
-
-                <b>
-                  NMIMS
-                </b>
-
-                <span>
-                  School of
-                  Technology,
-                  Management &
-                  Engineering
-                </span>
-
-              </div>
-
-              <div>
-
-                <b>
-                  AI + SWE
-                </b>
-
-                <span>
-                  Current
-                  direction
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* =====================================
-            TOOLKIT
-        ===================================== */}
+        {/* =====================================================
+            03 / TOOLKIT
+        ===================================================== */}
 
         <section
           id="skills"
@@ -1090,6 +1105,7 @@ function App() {
 
           </div>
 
+
           <div className="skill-grid">
 
             {skills.map(
@@ -1108,19 +1124,23 @@ function App() {
                     key={
                       group.label
                     }
+
                     initial={{
                       opacity: 0,
                       y: 35,
                     }}
+
                     whileInView={{
                       opacity: 1,
                       y: 0,
                     }}
+
                     viewport={{
                       once: true,
                       margin:
                         "-80px",
                     }}
+
                     transition={{
                       duration:
                         0.55,
@@ -1138,6 +1158,7 @@ function App() {
                         group.label
                       }
                     </h3>
+
 
                     <div className="skill-list">
 
@@ -1167,11 +1188,14 @@ function App() {
 
         </section>
 
-        {/* =====================================
-            LEADERSHIP
-        ===================================== */}
 
-        <section className="section leadership">
+        {/* =====================================================
+            04 / BEYOND CODE
+        ===================================================== */}
+
+        <section
+          className="section leadership"
+        >
 
           <div className="section-head">
 
@@ -1190,20 +1214,27 @@ function App() {
 
           </div>
 
+
           <div className="timeline">
 
-            {/* PR HEAD */}
+
+            {/* =================================
+                PUBLIC RELATIONS
+            ================================= */}
 
             <motion.div
               className="timeline-item"
+
               initial={{
                 opacity: 0,
                 x: -30,
               }}
+
               whileInView={{
                 opacity: 1,
                 x: 0,
               }}
+
               viewport={{
                 once: true,
               }}
@@ -1212,6 +1243,7 @@ function App() {
               <span>
                 2025 — 2026
               </span>
+
 
               <div>
 
@@ -1233,21 +1265,28 @@ function App() {
 
             </motion.div>
 
-            {/* PHOTOGRAPHY */}
+
+            {/* =================================
+                PHOTOGRAPHY
+            ================================= */}
 
             <motion.div
               className="timeline-item"
+
               initial={{
                 opacity: 0,
                 x: -30,
               }}
+
               whileInView={{
                 opacity: 1,
                 x: 0,
               }}
+
               viewport={{
                 once: true,
               }}
+
               transition={{
                 delay: 0.1,
               }}
@@ -1256,6 +1295,7 @@ function App() {
               <span>
                 2024 — 2025
               </span>
+
 
               <div>
 
@@ -1279,21 +1319,28 @@ function App() {
 
             </motion.div>
 
-            {/* ROTARACT */}
+
+            {/* =================================
+                ROTARACT
+            ================================= */}
 
             <motion.div
               className="timeline-item"
+
               initial={{
                 opacity: 0,
                 x: -30,
               }}
+
               whileInView={{
                 opacity: 1,
                 x: 0,
               }}
+
               viewport={{
                 once: true,
               }}
+
               transition={{
                 delay: 0.2,
               }}
@@ -1302,6 +1349,7 @@ function App() {
               <span>
                 2024 — 2025
               </span>
+
 
               <div>
 
@@ -1326,9 +1374,10 @@ function App() {
 
         </section>
 
-        {/* =====================================
+
+        {/* =====================================================
             CONTACT
-        ===================================== */}
+        ===================================================== */}
 
         <ContactEnding />
 
@@ -1337,5 +1386,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
