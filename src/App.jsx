@@ -49,10 +49,8 @@ const projects = [
     number: "01",
     title: "Broke But Thriving",
     type: "AI + FULL-STACK",
-
     description:
       "A personal finance management system combining predictive machine learning with an AI copilot for expense logging, simulations and personalized recommendations.",
-
     stack: [
       "React",
       "FastAPI",
@@ -61,10 +59,8 @@ const projects = [
       "LSTM",
       "ML",
     ],
-
     repo:
       "https://github.com/MetalKhamoo/BrokeButThriving",
-
     featured: true,
   },
 
@@ -72,17 +68,14 @@ const projects = [
     number: "02",
     title: "AI-driven CRM",
     type: "AI + FRONTEND",
-
     description:
       "A modern CRM application focused on turning customer information and workflows into a more intelligent and usable interface.",
-
     stack: [
       "React",
       "TypeScript",
       "Vite",
       "React Query",
     ],
-
     repo:
       "https://github.com/MetalKhamoo/AI-driven-CRM",
   },
@@ -91,17 +84,14 @@ const projects = [
     number: "03",
     title: "Placement Cell Management System",
     type: "FULL-STACK",
-
     description:
       "A role-based campus recruitment platform connecting students, administrators, HOD, principal and placement teams through centralized workflows.",
-
     stack: [
       "PHP",
       "MySQL",
       "JavaScript",
       "Role-based Access",
     ],
-
     repo:
       "https://github.com/MetalKhamoo/PCMS",
   },
@@ -110,17 +100,14 @@ const projects = [
     number: "04",
     title: "PawRescue",
     type: "ANDROID",
-
     description:
       "An Android application for reporting injured or stray animals with image uploads, location pinning and database-backed rescue workflows.",
-
     stack: [
       "Java",
       "Android",
       "SQLite",
       "Google Maps API",
     ],
-
     repo:
       "https://github.com/MetalKhamoo/PawRescue",
   },
@@ -135,7 +122,6 @@ const skills = [
   {
     icon: BrainCircuit,
     label: "AI / ML",
-
     items: [
       "Machine Learning",
       "TensorFlow",
@@ -148,7 +134,6 @@ const skills = [
   {
     icon: Code2,
     label: "Languages",
-
     items: [
       "Python",
       "Java",
@@ -162,7 +147,6 @@ const skills = [
   {
     icon: Server,
     label: "Development",
-
     items: [
       "React",
       "FastAPI",
@@ -176,7 +160,6 @@ const skills = [
   {
     icon: Database,
     label: "Data",
-
     items: [
       "MySQL",
       "PostgreSQL",
@@ -190,7 +173,6 @@ const skills = [
   {
     icon: Terminal,
     label: "Tools",
-
     items: [
       "Git",
       "Docker",
@@ -255,8 +237,7 @@ function ParticleField() {
             0.18,
 
           size:
-            Math.random() *
-              1.6 +
+            Math.random() * 1.6 +
             0.4,
         })
       );
@@ -327,7 +308,7 @@ function ParticleField() {
           const distance =
             Math.sqrt(
               dx * dx +
-                dy * dy
+              dy * dy
             );
 
           if (distance < 135) {
@@ -486,8 +467,6 @@ function App() {
 
         <nav className="nav">
 
-          {/* Logo */}
-
           <button
             className="brand"
             onClick={() =>
@@ -498,8 +477,6 @@ function App() {
             PD<span>.</span>
           </button>
 
-
-          {/* Navigation links */}
 
           <div
             className={`nav-links ${
@@ -553,7 +530,6 @@ function App() {
               rel="noreferrer"
             >
               GitHub
-
               <ArrowUpRight
                 size={13}
               />
@@ -561,8 +537,6 @@ function App() {
 
           </div>
 
-
-          {/* Mobile menu */}
 
           <button
             className="menu"
@@ -924,273 +898,7 @@ function App() {
 
 
         {/* =====================================================
-            02 / SELECTED WORK
-        ===================================================== */}
-
-        <section
-          id="work"
-          className="section work"
-        >
-
-          <div className="section-head">
-
-            <div>
-
-              <span className="section-index">
-                02 / SELECTED WORK
-              </span>
-
-              <h2>
-                Things I've built.
-              </h2>
-
-            </div>
-
-
-            <p>
-              Projects where
-              software, data and
-              problem-solving meet.
-            </p>
-
-          </div>
-
-
-          <div className="projects">
-
-            {projects.map(
-              (
-                project,
-                index
-              ) => (
-
-                <motion.article
-                  className={`project ${
-                    project.featured
-                      ? "featured"
-                      : ""
-                  }`}
-                  key={
-                    project.title
-                  }
-
-                  initial={{
-                    opacity: 0,
-                    y: 60,
-                  }}
-
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-
-                  viewport={{
-                    once: true,
-                    margin:
-                      "-100px",
-                  }}
-
-                  transition={{
-                    duration: 0.7,
-                    delay:
-                      index * 0.1,
-                    ease:
-                      "easeOut",
-                  }}
-                >
-
-                  <div className="project-top">
-
-                    <span className="project-number">
-                      {
-                        project.number
-                      }
-                    </span>
-
-                    <span className="project-type">
-                      {
-                        project.type
-                      }
-                    </span>
-
-                  </div>
-
-
-                  <div className="project-body">
-
-                    <div>
-
-                      <h3>
-                        {
-                          project.title
-                        }
-                      </h3>
-
-                      <p>
-                        {
-                          project.description
-                        }
-                      </p>
-
-                    </div>
-
-
-                    <a
-                      className="project-link"
-                      href={
-                        project.repo
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      View repository
-
-                      <ArrowUpRight
-                        size={17}
-                      />
-
-                    </a>
-
-                  </div>
-
-
-                  <div className="tags">
-
-                    {project.stack.map(
-                      (tech) => (
-
-                        <span
-                          key={tech}
-                        >
-                          {tech}
-                        </span>
-
-                      )
-                    )}
-
-                  </div>
-
-                </motion.article>
-
-              )
-            )}
-
-          </div>
-
-        </section>
-
-
-        {/* =====================================================
-            03 / TOOLKIT
-        ===================================================== */}
-
-        <section
-          id="skills"
-          className="section skills"
-        >
-
-          <div className="section-head">
-
-            <div>
-
-              <span className="section-index">
-                03 / TOOLKIT
-              </span>
-
-              <h2>
-                What I work with.
-              </h2>
-
-            </div>
-
-          </div>
-
-
-          <div className="skill-grid">
-
-            {skills.map(
-              (
-                group,
-                index
-              ) => {
-
-                const Icon =
-                  group.icon;
-
-                return (
-
-                  <motion.div
-                    className="skill-card"
-                    key={
-                      group.label
-                    }
-
-                    initial={{
-                      opacity: 0,
-                      y: 35,
-                    }}
-
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-
-                    viewport={{
-                      once: true,
-                      margin:
-                        "-80px",
-                    }}
-
-                    transition={{
-                      duration:
-                        0.55,
-                      delay:
-                        index * 0.08,
-                    }}
-                  >
-
-                    <Icon
-                      size={21}
-                    />
-
-                    <h3>
-                      {
-                        group.label
-                      }
-                    </h3>
-
-
-                    <div className="skill-list">
-
-                      {group.items.map(
-                        (item) => (
-
-                          <span
-                            key={
-                              item
-                            }
-                          >
-                            {item}
-                          </span>
-
-                        )
-                      )}
-
-                    </div>
-
-                  </motion.div>
-
-                );
-              }
-            )}
-
-          </div>
-
-        </section>
-
-
-        {/* =====================================================
-            04 / BEYOND CODE
+            02 / BEYOND CODE
         ===================================================== */}
 
         <section
@@ -1202,7 +910,7 @@ function App() {
             <div>
 
               <span className="section-index">
-                04 / BEYOND CODE
+                02 / BEYOND CODE
               </span>
 
               <h2>
@@ -1369,6 +1077,272 @@ function App() {
               </div>
 
             </motion.div>
+
+          </div>
+
+        </section>
+
+
+        {/* =====================================================
+            03 / SELECTED WORK
+        ===================================================== */}
+
+        <section
+          id="work"
+          className="section work"
+        >
+
+          <div className="section-head">
+
+            <div>
+
+              <span className="section-index">
+                03 / SELECTED WORK
+              </span>
+
+              <h2>
+                Things I've built.
+              </h2>
+
+            </div>
+
+
+            <p>
+              Projects where
+              software, data and
+              problem-solving meet.
+            </p>
+
+          </div>
+
+
+          <div className="projects">
+
+            {projects.map(
+              (
+                project,
+                index
+              ) => (
+
+                <motion.article
+                  className={`project ${
+                    project.featured
+                      ? "featured"
+                      : ""
+                  }`}
+                  key={
+                    project.title
+                  }
+
+                  initial={{
+                    opacity: 0,
+                    y: 60,
+                  }}
+
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+
+                  viewport={{
+                    once: true,
+                    margin:
+                      "-100px",
+                  }}
+
+                  transition={{
+                    duration: 0.7,
+                    delay:
+                      index * 0.1,
+                    ease:
+                      "easeOut",
+                  }}
+                >
+
+                  <div className="project-top">
+
+                    <span className="project-number">
+                      {
+                        project.number
+                      }
+                    </span>
+
+                    <span className="project-type">
+                      {
+                        project.type
+                      }
+                    </span>
+
+                  </div>
+
+
+                  <div className="project-body">
+
+                    <div>
+
+                      <h3>
+                        {
+                          project.title
+                        }
+                      </h3>
+
+                      <p>
+                        {
+                          project.description
+                        }
+                      </p>
+
+                    </div>
+
+
+                    <a
+                      className="project-link"
+                      href={
+                        project.repo
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View repository
+
+                      <ArrowUpRight
+                        size={17}
+                      />
+
+                    </a>
+
+                  </div>
+
+
+                  <div className="tags">
+
+                    {project.stack.map(
+                      (tech) => (
+
+                        <span
+                          key={tech}
+                        >
+                          {tech}
+                        </span>
+
+                      )
+                    )}
+
+                  </div>
+
+                </motion.article>
+
+              )
+            )}
+
+          </div>
+
+        </section>
+
+
+        {/* =====================================================
+            04 / TOOLKIT
+        ===================================================== */}
+
+        <section
+          id="skills"
+          className="section skills"
+        >
+
+          <div className="section-head">
+
+            <div>
+
+              <span className="section-index">
+                04 / TOOLKIT
+              </span>
+
+              <h2>
+                What I work with.
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div className="skill-grid">
+
+            {skills.map(
+              (
+                group,
+                index
+              ) => {
+
+                const Icon =
+                  group.icon;
+
+                return (
+
+                  <motion.div
+                    className="skill-card"
+                    key={
+                      group.label
+                    }
+
+                    initial={{
+                      opacity: 0,
+                      y: 35,
+                    }}
+
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+
+                    viewport={{
+                      once: true,
+                      margin:
+                        "-80px",
+                    }}
+
+                    transition={{
+                      duration:
+                        0.55,
+                      delay:
+                        index * 0.08,
+                    }}
+                  >
+
+                    <Icon
+                      size={21}
+                    />
+
+                    <h3>
+                      {
+                        group.label
+                      }
+                    </h3>
+
+
+                    <div className="skill-list">
+
+                      {group.items.map(
+                        (item) => (
+
+                          <span
+                            key={
+                              item
+                            }
+                          >
+                            {item}
+                          </span>
+
+                        )
+                      )}
+
+                    </div>
+
+                  </motion.div>
+
+                );
+              }
+            )}
 
           </div>
 
