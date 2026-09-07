@@ -355,7 +355,7 @@ h1 em {
     0 30px 80px rgba(0, 0, 0, 0.45),
     0 0 90px rgba(52, 145, 232, 0.14);
 
-  transform: rotate(2deg);
+  transform: rotate(0deg);
 
   overflow: visible;
 }
