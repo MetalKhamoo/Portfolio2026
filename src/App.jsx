@@ -1342,13 +1342,13 @@ function App() {
 
 
               <h3>
-                Sports Joint Director, Mumbai · 
+                Sports Joint Director 
               </h3>
 
 
               <h4>
                 Rotaract Club of
-                Parleshware Genz
+                Parleshware Genz, Mumbai 
               </h4>
 
 
@@ -1412,7 +1412,7 @@ function App() {
             >
 
               <div className="experience-year">
-                May '24
+                2024
               </div>
 
 
@@ -1422,7 +1422,7 @@ function App() {
 
 
               <h4>
-                Smiles Foundation
+                Smiles Foundation, Navi Mumbai
               </h4>
 
 
