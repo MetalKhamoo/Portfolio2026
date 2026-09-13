@@ -49,7 +49,7 @@ const RESUME_URL = "/resume.pdf";
 
 const projects = [
   {
-    number: "01",
+    year: "2025",
     title: "Broke But Thriving",
     type: "AI + FULL-STACK",
     description:
@@ -84,7 +84,7 @@ const projects = [
   },
 
   {
-    number: "02",
+    year: "2024",
     title: "AI-driven CRM",
     type: "AI + FRONTEND",
     description:
@@ -115,7 +115,7 @@ const projects = [
   },
 
   {
-    number: "03",
+    year: "2024",
     title: "Placement Cell Management System",
     type: "FULL-STACK",
     description:
@@ -146,7 +146,7 @@ const projects = [
   },
 
   {
-    number: "04",
+    year: "2025",
     title: "PawRescue",
     type: "ANDROID",
     description:
@@ -913,7 +913,7 @@ function App() {
               {/* PROJECT INTRO */}
               <section className="project-detail-hero">
                 <div className="project-detail-kicker">
-                  <span>{selectedProject.number}</span>
+                  <span>{selectedProject.year}</span>
                   <span>{selectedProject.type}</span>
                   <span>SELECTED WORK</span>
                 </div>
@@ -941,7 +941,7 @@ function App() {
                 ) : (
                   <div className="project-detail-visual-inner">
                     <span className="project-detail-visual-number">
-                      {selectedProject.number}
+                      {selectedProject.year}
                     </span>
                     <span className="project-detail-visual-label">
                       {selectedProject.type}
@@ -1903,7 +1903,7 @@ function App() {
 
                     <span className="project-number">
                       {
-                        project.number
+                        project.year
                       }
                     </span>
 

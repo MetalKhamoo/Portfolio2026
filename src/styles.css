@@ -2544,227 +2544,507 @@ body.project-detail-open {
     padding-bottom: 50px;
   }
 }
+
 /* =========================================================
-   PROJECT DETAIL — REFERENCE TYPOGRAPHY
+   PROJECT DETAIL — REFERENCE 100% SCALE
+   Homepage is intentionally untouched.
+   These rules affect the ENTIRE project-detail page.
    ========================================================= */
 
 .project-detail-layer {
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #050811;
 }
 
-/* Main project title */
-.project-detail-hero h1 {
-  font-size: clamp(42px, 5vw, 64px);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+/* Reference outer navigation: centered, not full-width */
+.project-detail-nav {
+  width: min(1120px, calc(100% - 48px));
+  max-width: 1120px;
+  height: 66px;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.project-detail-brand {
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: -0.04em;
 }
 
-/* Project subtitle / intro */
-.project-detail-hero p {
-  max-width: 720px;
+.project-detail-back {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-detail-back-arrow {
+  font-size: 15px;
+}
+
+/* Main inner column */
+.project-detail-content {
+  width: min(760px, calc(100% - 48px));
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 66px 0 90px;
+  box-sizing: border-box;
+}
+
+/* Intro */
+.project-detail-hero {
+  max-width: 760px;
+}
+
+.project-detail-kicker {
+  gap: 9px 16px;
+  margin-bottom: 22px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  line-height: 1.3;
+}
+
+.project-detail-hero h1 {
+  margin: 0;
+  font-size: clamp(48px, 5vw, 64px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  color: #eaf1fb;
+}
+
+.project-detail-intro {
+  max-width: 650px;
+  margin: 23px 0 0;
+  color: #8191a5;
   font-size: 13px;
+  font-weight: 400;
   line-height: 1.7;
   letter-spacing: -0.005em;
-  color: #8995a8;
 }
 
-/* GitHub / repository link */
-.project-detail-layer .project-detail-link,
-.project-detail-layer a {
+.project-detail-tags {
+  gap: 6px;
+  margin-top: 23px;
+}
+
+.project-detail-tags span {
+  padding: 5px 8px;
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+/* Reference image/card size */
+.project-detail-visual {
+  width: 646px;
+  max-width: 100%;
+  min-height: 374px;
+  margin-top: 50px;
+  margin-left: 0;
+  border-color: rgba(120, 175, 220, 0.22);
+  box-sizing: border-box;
+}
+
+.project-detail-visual img {
+  width: 100%;
+  max-height: 620px;
+}
+
+.project-detail-visual-inner {
+  min-height: 374px;
+  padding: 58px 66px;
+}
+
+.project-detail-visual-number {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.project-detail-visual-label {
+  margin-top: 12px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.project-detail-visual-inner h2 {
+  margin-top: 17px;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+
+.project-detail-visual-stack {
+  gap: 6px;
+  margin-top: 22px;
+}
+
+.project-detail-visual-stack span {
+  padding: 5px 8px;
+  font-size: 7px;
+}
+
+.project-detail-divider {
+  width: 646px;
+  max-width: 100%;
+  margin-top: 46px;
+}
+
+/* Repository row */
+.project-detail-repository {
+  width: 646px;
+  max-width: 100%;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 26px;
+  min-height: 62px;
+}
+
+.project-detail-repository > span {
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.project-detail-repository a,
+.project-detail-github {
   font-size: 12px;
-  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* Every detail section gets the same reference treatment */
+.project-detail-sections {
+  width: 760px;
+  max-width: 100%;
+}
+
+.project-detail-row {
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 30px;
+  min-height: 0;
+  padding: 30px 0 32px;
+  border-bottom: 1px solid rgba(120, 175, 220, 0.18);
+}
+
+.project-detail-label {
+  padding-top: 3px;
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.20em;
+  color: #4f7395;
+}
+
+.project-detail-copy {
+  max-width: 646px;
+}
+
+.project-detail-copy h2 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #e5edf8;
+}
+
+.project-detail-copy p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.72;
+  font-weight: 400;
+  color: #7f8fa4;
+}
+
+/* Footer */
+.project-detail-footer {
+  width: 646px;
+  max-width: 100%;
+  padding: 25px 0 12px;
+}
+
+.project-detail-footer button {
+  font-size: 9px;
+  font-weight: 600;
+}
+
+/* Keep the entire page at the reference scale on normal desktop */
+@media (min-width: 761px) {
+  .project-detail-content {
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .project-detail-nav {
+    width: calc(100% - 32px);
+    height: 64px;
+  }
+
+  .project-detail-content {
+    width: calc(100% - 32px);
+    padding: 48px 0 60px;
+  }
+
+  .project-detail-hero h1 {
+    font-size: 44px;
+  }
+
+  .project-detail-visual,
+  .project-detail-divider,
+  .project-detail-repository,
+  .project-detail-footer {
+    width: 100%;
+  }
+
+  .project-detail-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 26px 0 28px;
+  }
+
+  .project-detail-copy {
+    max-width: 100%;
+  }
 }
 
 /* =========================================================
-   DETAIL CONTENT ROWS
+   FINAL PROJECT DETAIL — REFERENCE TYPOGRAPHY / SCALE
+   Homepage styles are intentionally untouched.
    ========================================================= */
 
-.project-detail-section {
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  column-gap: 34px;
-  padding: 30px 0;
-  border-top: 1px solid rgba(125, 155, 190, 0.22);
+.project-detail-layer,
+.project-detail-layer * {
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Small label on left */
-.project-detail-section-label {
-  font-size: 7px;
+.project-detail-content {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 68px 40px 60px;
+}
+
+.project-detail-hero {
+  max-width: 820px;
+}
+
+.project-detail-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px 17px;
+  margin-bottom: 24px;
+  color: #55708a;
+  font-size: 8px;
   line-height: 1.25;
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #4d86b8;
 }
 
-/* Section heading */
-.project-detail-section h2 {
-  margin: 0 0 13px;
-
-  font-size: 15px;
-  line-height: 1.25;
-  font-weight: 600;
-
-  letter-spacing: -0.025em;
-  color: #e7edf7;
+.project-detail-kicker span:nth-child(2) {
+  color: var(--accent);
 }
 
-/* Section paragraph */
-.project-detail-section p {
+.project-detail-hero h1 {
   margin: 0;
-  max-width: 650px;
+  color: #e9f1fb;
+  font-size: clamp(52px, 6vw, 76px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
 
-  font-size: 11px;
-  line-height: 1.7;
+.project-detail-intro {
+  max-width: 700px;
+  margin: 23px 0 0;
+  color: #8594a7;
+  font-size: 12px;
+  line-height: 1.75;
   font-weight: 400;
-
-  letter-spacing: 0;
-  color: #7e8da3;
 }
-
-/* Multiple paragraphs */
-.project-detail-section p + p {
-  margin-top: 12px;
-}
-
-/* =========================================================
-   DETAIL CONTENT WIDTH
-   ========================================================= */
-
-.project-detail-content {
-  width: min(760px, calc(100% - 40px));
-  margin: 0 auto;
-}
-
-/* =========================================================
-   TOP PROJECT LINK ROW
-   ========================================================= */
-
-.project-detail-repo {
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  column-gap: 34px;
-
-  padding: 27px 0;
-  border-top: 1px solid rgba(125, 155, 190, 0.22);
-  border-bottom: 1px solid rgba(125, 155, 190, 0.22);
-}
-
-.project-detail-repo-label {
-  font-size: 7px;
-  line-height: 1.25;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #4d86b8;
-}
-
-.project-detail-repo a {
-  font-size: 13px;
-  line-height: 1.4;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #e8eef8;
-  text-decoration: none;
-}
-
-/* =========================================================
-   TECHNOLOGY TAGS
-   ========================================================= */
 
 .project-detail-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 22px;
 }
 
 .project-detail-tags span {
+  padding: 5px 8px;
+  border: 1px solid rgba(85, 145, 205, 0.27);
+  border-radius: 999px;
+  color: #70859b;
   font-size: 7px;
   line-height: 1;
-
-  padding: 5px 8px;
-
-  border: 1px solid rgba(80, 130, 175, 0.35);
-  border-radius: 999px;
-
-  color: #7890a9;
+  font-weight: 400;
   letter-spacing: 0.02em;
 }
 
-/* =========================================================
-   REFERENCE-LIKE SPACING
-   ========================================================= */
-
-.project-detail-layer .project-detail-body {
-  width: min(760px, calc(100% - 40px));
-  margin: 0 auto;
+.project-detail-visual {
+  min-height: 390px;
+  margin-top: 50px;
 }
 
-.project-detail-layer .project-detail-body > section {
-  padding-top: 30px;
-  padding-bottom: 30px;
+.project-detail-visual-inner {
+  min-height: 390px;
+  padding: 64px;
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+.project-detail-visual-number {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
 
-@media (max-width: 700px) {
-  .project-detail-content,
-  .project-detail-layer .project-detail-body {
-    width: calc(100% - 32px);
-  }
+.project-detail-visual-label {
+  margin-top: 12px;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
 
-  .project-detail-section,
-  .project-detail-repo {
-    grid-template-columns: 1fr;
-    gap: 13px;
-  }
+.project-detail-visual-inner h2 {
+  margin-top: 17px;
+  color: #e9f1fb;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
 
-  .project-detail-section-label,
-  .project-detail-repo-label {
-    margin-bottom: 2px;
-  }
+.project-detail-visual-stack {
+  gap: 6px;
+  margin-top: 22px;
+}
 
-  .project-detail-section h2 {
-    font-size: 15px;
-  }
+.project-detail-visual-stack span {
+  padding: 5px 8px;
+  font-size: 7px;
+}
 
-  .project-detail-section p {
-    font-size: 11px;
+.project-detail-divider {
+  margin-top: 46px;
+}
+
+.project-detail-repository {
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 34px;
+  min-height: 64px;
+}
+
+.project-detail-repository > span,
+.project-detail-label {
+  color: #4f6d87;
+  font-size: 7px;
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: 0.21em;
+  text-transform: uppercase;
+}
+
+.project-detail-repository a,
+.project-detail-github {
+  color: #dce7f3;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.project-detail-row {
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 34px;
+  padding: 30px 0 34px;
+}
+
+.project-detail-copy {
+  max-width: 680px;
+}
+
+.project-detail-copy h2 {
+  margin: 0 0 13px;
+  color: #e5edf7;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.project-detail-copy p,
+.project-feature-item p {
+  margin: 0;
+  color: #7e8ea3;
+  font-size: 11px;
+  line-height: 1.72;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.project-feature-list {
+  margin-top: 18px;
+}
+
+.project-feature-item {
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 11px 0;
+}
+
+.project-feature-item span {
+  font-size: 7px;
+}
+
+.project-detail-footer {
+  padding: 24px 0 12px;
+}
+
+.project-detail-footer button {
+  font-size: 9px;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .project-detail-content {
+    width: 100%;
+    padding: 52px 20px 42px;
   }
 
   .project-detail-hero h1 {
-    font-size: 42px;
+    font-size: 44px;
   }
-}
-/* =========================================================
-   PROJECT DETAIL — REFERENCE FONT
-   ========================================================= */
 
-.project-detail-layer {
-  font-family:
-    "Inter",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-}
+  .project-detail-intro {
+    font-size: 11px;
+  }
 
-.project-detail-layer h1,
-.project-detail-layer h2,
-.project-detail-layer h3,
-.project-detail-layer p,
-.project-detail-layer a,
-.project-detail-layer span {
-  font-family: inherit;
+  .project-detail-visual,
+  .project-detail-visual-inner {
+    min-height: 280px;
+  }
+
+  .project-detail-visual-inner {
+    padding: 34px;
+  }
+
+  .project-detail-visual-inner h2 {
+    font-size: 38px;
+  }
+
+  .project-detail-repository,
+  .project-detail-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .project-detail-row {
+    padding: 27px 0 30px;
+  }
 }
