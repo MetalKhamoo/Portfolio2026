@@ -65,6 +65,22 @@ const projects = [
     repo:
       "https://github.com/MetalKhamoo/BrokeButThriving",
     featured: true,
+    details: {
+      overview:
+        "Broke But Thriving is a personal finance management system built to help users understand spending behaviour, track expenses and make better financial decisions using machine learning and an AI copilot.",
+      technical:
+        "The application combines a React frontend with a FastAPI and Python backend. Multiple machine-learning approaches including LSTM, MLP, Gradient Boosting and linear models are used for predictive analysis, while an AI copilot handles natural-language interaction and function-based actions.",
+      features: [
+        "Expense tracking and categorisation",
+        "Predictive financial analysis",
+        "Financial simulations",
+        "Personalised recommendations",
+        "AI-assisted expense logging",
+        "Natural-language interaction with financial data",
+      ],
+      learning:
+        "The project focused on combining full-stack development, machine learning and AI interaction into one practical product rather than treating each technology as an isolated component.",
+    },
   },
 
   {
@@ -81,6 +97,21 @@ const projects = [
     ],
     repo:
       "https://github.com/MetalKhamoo/AI-driven-CRM",
+    details: {
+      overview:
+        "AI-driven CRM is a customer relationship management application focused on making customer information and workflows easier to understand, manage and act on.",
+      technical:
+        "The project uses React, TypeScript, Vite and React Query to build a structured frontend and manage application data and asynchronous workflows.",
+      features: [
+        "Customer information management",
+        "Structured CRM workflows",
+        "Responsive React interface",
+        "Type-safe development with TypeScript",
+        "Client-side data fetching and state management",
+      ],
+      learning:
+        "The project strengthened my understanding of component-driven frontend architecture, typed development and managing application data cleanly in a modern React stack.",
+    },
   },
 
   {
@@ -97,6 +128,21 @@ const projects = [
     ],
     repo:
       "https://github.com/MetalKhamoo/PCMS",
+    details: {
+      overview:
+        "The Placement Cell Management System is a role-based campus recruitment platform designed to centralise placement workflows for students, administrators, HODs, the principal and the placement team.",
+      technical:
+        "The system was developed using PHP, MySQL and JavaScript, with role-based access controlling the workflows and information available to different users.",
+      features: [
+        "Role-based user access",
+        "Centralised placement workflows",
+        "Student and administrator management",
+        "Placement coordination",
+        "MySQL-backed data management",
+      ],
+      learning:
+        "This project gave me practical experience with role-based application design, relational databases and building software around multiple user roles and institutional workflows.",
+    },
   },
 
   {
@@ -113,6 +159,22 @@ const projects = [
     ],
     repo:
       "https://github.com/MetalKhamoo/PawRescue",
+    details: {
+      overview:
+        "PawRescue is an Android application for reporting injured or stray animals and connecting reports with location and rescue workflows.",
+      technical:
+        "The application was developed in Java with SQLite for local data storage and Google Maps API integration for location pinning and map-based reporting.",
+      features: [
+        "Animal incident reporting",
+        "Image upload for reports",
+        "Location pinning",
+        "SQLite-backed data storage",
+        "Map-based location support",
+        "Rescue-oriented reporting workflow",
+      ],
+      learning:
+        "The project helped me understand Android application development, local persistence, location-based features and designing technology around a real-world community problem.",
+    },
   },
 ];
 
@@ -382,6 +444,7 @@ function ParticleField() {
 function App() {
   const [open, setOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [activeSection, setActiveSection] = useState("home");
 
   const heroRef = useRef(null);
@@ -401,6 +464,22 @@ function App() {
       document.body.classList.remove("resume-open");
     };
   }, [resumeOpen]);
+
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setSelectedProject(null);
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    document.body.classList.add("project-detail-open");
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.classList.remove("project-detail-open");
+    };
+  }, [selectedProject]);
 
 
   /* =========================================
@@ -510,13 +589,14 @@ function App() {
   return (
     <div className="site">
 
-      {/* Neural background */}
+      {/* Decorative background layers — never intercept project clicks */}
+      <div className="neural-background-layer" aria-hidden="true">
+        <NeuralBackground />
+      </div>
 
-      <NeuralBackground />
-
-      {/* Particle background */}
-
-      <ParticleField />
+      <div className="particle-background-layer" aria-hidden="true">
+        <ParticleField />
+      </div>
 
       {/* Noise */}
 
@@ -548,7 +628,7 @@ function App() {
             }
             aria-label="Go home"
           >
-            PD<span></span>
+            PD<span>.</span>
           </button>
 
 
@@ -772,6 +852,185 @@ function App() {
         </div>
       )}
 
+
+      {selectedProject && (
+        <div className="project-detail-layer">
+          <div className="project-detail-shell">
+            <header className="project-detail-nav">
+              <button
+                className="project-detail-brand"
+                type="button"
+                onClick={() => setSelectedProject(null)}
+                aria-label="Back to portfolio"
+              >
+                PD<span>.</span>
+              </button>
+
+              <button
+                className="project-detail-back"
+                type="button"
+                onClick={() => setSelectedProject(null)}
+              >
+                <span className="project-detail-back-arrow">←</span>
+                All Projects
+              </button>
+            </header>
+
+            <main className="project-detail-content">
+              {/* PROJECT INTRO */}
+              <section className="project-detail-hero">
+                <div className="project-detail-kicker">
+                  <span>{selectedProject.number}</span>
+                  <span>{selectedProject.type}</span>
+                  <span>SELECTED WORK</span>
+                </div>
+
+                <h1>{selectedProject.title}</h1>
+
+                <p className="project-detail-intro">
+                  {selectedProject.description}
+                </p>
+
+                <div className="project-detail-tags">
+                  {selectedProject.stack.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+              </section>
+
+              {/* PROJECT VISUAL — optional image can be added later as project.image */}
+              <section className="project-detail-visual">
+                {selectedProject.image ? (
+                  <img
+                    src={selectedProject.image}
+                    alt={`${selectedProject.title} project preview`}
+                  />
+                ) : (
+                  <div className="project-detail-visual-inner">
+                    <span className="project-detail-visual-number">
+                      {selectedProject.number}
+                    </span>
+                    <span className="project-detail-visual-label">
+                      {selectedProject.type}
+                    </span>
+                    <h2>{selectedProject.title}</h2>
+                    <div className="project-detail-visual-stack">
+                      {selectedProject.stack.slice(0, 5).map((tech) => (
+                        <span key={tech}>{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </section>
+
+              <div className="project-detail-divider" />
+
+              {/* REPOSITORY */}
+              <div className="project-detail-repository">
+                <span>PROJECT REPOSITORY</span>
+                <a
+                  href={selectedProject.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View on GitHub
+                  <ArrowUpRight size={15} />
+                </a>
+              </div>
+
+              {/* DETAIL SECTIONS */}
+              <div className="project-detail-sections">
+                <section className="project-detail-row">
+                  <div className="project-detail-label">
+                    PROJECT OVERVIEW
+                  </div>
+                  <div className="project-detail-copy">
+                    <h2>{
+                      selectedProject.title === "Broke But Thriving"
+                        ? "Building a smarter personal finance workflow"
+                        : "The problem and the solution"
+                    }</h2>
+                    <p>{selectedProject.details.overview}</p>
+                  </div>
+                </section>
+
+                <section className="project-detail-row">
+                  <div className="project-detail-label">
+                    TECHNICAL APPROACH
+                  </div>
+                  <div className="project-detail-copy">
+                    <h2>How the system works</h2>
+                    <p>{selectedProject.details.technical}</p>
+                  </div>
+                </section>
+
+                <section className="project-detail-row">
+                  <div className="project-detail-label">
+                    KEY FEATURES
+                  </div>
+                  <div className="project-detail-copy">
+                    <h2>What the system does</h2>
+                    <div className="project-feature-list">
+                      {selectedProject.details.features.map((feature, index) => (
+                        <div className="project-feature-item" key={feature}>
+                          <span>0{index + 1}</span>
+                          <p>{feature}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                <section className="project-detail-row">
+                  <div className="project-detail-label">
+                    IMPLEMENTATION
+                  </div>
+                  <div className="project-detail-copy">
+                    <h2>Turning the idea into a working product</h2>
+                    <p>
+                      The project brings its interface, application logic,
+                      data layer and technology stack together as one usable
+                      workflow. The implementation decisions were made around
+                      the actual problem the project is intended to solve.
+                    </p>
+                  </div>
+                </section>
+
+                <section className="project-detail-row">
+                  <div className="project-detail-label">
+                    WHAT I LEARNED
+                  </div>
+                  <div className="project-detail-copy">
+                    <h2>What this project taught me</h2>
+                    <p>{selectedProject.details.learning}</p>
+                  </div>
+                </section>
+              </div>
+
+              {/* FOOTER */}
+              <footer className="project-detail-footer">
+                <a
+                  className="project-detail-github"
+                  href={selectedProject.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View on GitHub
+                  <ArrowUpRight size={15} />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedProject(null)}
+                >
+                  <span>←</span>
+                  Back to Projects
+                </button>
+              </footer>
+            </main>
+          </div>
+        </div>
+      )}
 
       <main>
 
@@ -1342,13 +1601,13 @@ function App() {
 
 
               <h3>
-                Sports Joint Director 
+                Sports Joint Director, Mumbai · 
               </h3>
 
 
               <h4>
                 Rotaract Club of
-                Parleshware Genz, Mumbai 
+                Parleshware Genz
               </h4>
 
 
@@ -1412,7 +1671,7 @@ function App() {
             >
 
               <div className="experience-year">
-                2024
+                May '24
               </div>
 
 
@@ -1422,7 +1681,7 @@ function App() {
 
 
               <h4>
-                Smiles Foundation, Navi Mumbai
+                Smiles Foundation
               </h4>
 
 
@@ -1505,7 +1764,7 @@ function App() {
               ) => (
 
                 <motion.article
-                  className={`project ${
+                  className={`project project-clickable ${
                     project.featured
                       ? "featured"
                       : ""
@@ -1514,6 +1773,21 @@ function App() {
                   key={
                     project.title
                   }
+
+                  onClick={() =>
+                    setSelectedProject(project)
+                  }
+
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setSelectedProject(project);
+                    }
+                  }}
+
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open details for ${project.title}`}
 
                   initial={{
                     opacity: 0,
@@ -1580,6 +1854,9 @@ function App() {
                       className="project-link"
                       href={
                         project.repo
+                      }
+                      onClick={(event) =>
+                        event.stopPropagation()
                       }
                       target="_blank"
                       rel="noreferrer"
