@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import type { KeyboardEvent,} from "react";
 import NeuralBackground from "./components/NeuralBackground";
 import Lenis from "lenis";
 import { motion } from "framer-motion";
@@ -44,10 +45,43 @@ const RESUME_URL = "/resume.pdf";
 
 
 /* =========================================
+   TYPES
+========================================= */
+
+interface ProjectDetails {
+  overview: string;
+  technical: string;
+  features?: string[];
+  problem?: string;
+  architecture?: string;
+  integration?: string;
+  learning?: string;
+  finalLearning?: string;
+}
+
+interface Project {
+  year: string;
+  title: string;
+  type: string;
+  description: string;
+  stack: string[];
+  repo: string;
+  featured?: boolean;
+  image?: string;
+  details: ProjectDetails;
+}
+
+interface SkillGroup {
+  icon: React.ComponentType<{ size?: number }>;
+  label: string;
+  items: string[];
+}
+
+/* =========================================
    PROJECT DATA
 ========================================= */
 
-const projects = [
+const projects: Project[] = [
   {
     year: "2025",
     title: "Broke But Thriving",
@@ -78,8 +112,16 @@ const projects = [
         "AI-assisted expense logging",
         "Natural-language interaction with financial data",
       ],
+      problem:
+        "Managing personal finances is often less about a lack of data and more about not knowing what that data means. Students can track expenses, but turning spending history into useful predictions, simulations and actionable decisions is much harder. Broke But Thriving was built to bridge that gap by combining financial tracking with predictive analysis and an AI copilot.",
+      architecture:
+        "The system follows a full-stack architecture with a React frontend, FastAPI/Python backend and SQL-based data layer. Financial data flows from the application into preprocessing and machine-learning pipelines, where multiple models generate forecasts and risk signals. The resulting information is exposed back to the application so the dashboard and AI copilot can work with the same underlying financial context.",
+      integration:
+        "The most interesting part of the system was connecting the machine-learning layer with an LLM-powered AI copilot. Llama 3.3 70B was used with function calling so the copilot could work with application data and perform useful actions such as retrieving dashboard information, running simulations, logging expenses and supporting savings challenges instead of behaving like a standalone chatbot.",
       learning:
-        "The project focused on combining full-stack development, machine learning and AI interaction into one practical product rather than treating each technology as an isolated component.",
+        "I learned that building an ML product requires much more than training a model. Working with financial data made preprocessing, feature design and preventing data leakage important parts of the engineering process. I also learned how to compare sequence models such as LSTMs with MLPs, Gradient Boosting and simpler linear baselines, which helped me understand when model complexity is actually justified.",
+      finalLearning:
+        "The biggest takeaway was learning to think of AI as a complete system rather than an isolated model. Connecting the frontend, backend, database, prediction pipelines and LLM-based interaction taught me to think about data flow, reliability, evaluation and user experience together. The goal is not simply to build the most complicated model, but to build a system that solves the right problem and turns predictions into something a user can actually act on.",
     },
   },
 
@@ -183,7 +225,7 @@ const projects = [
    SKILL DATA
 ========================================= */
 
-const skills = [
+const skills: SkillGroup[] = [
   {
     icon: BrainCircuit,
     label: "AI / ML",
@@ -253,7 +295,7 @@ const skills = [
 ========================================= */
 
 function ParticleField() {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -269,7 +311,7 @@ function ParticleField() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const resize = () => {
+    const resize = (): void => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
@@ -308,7 +350,7 @@ function ParticleField() {
       );
     };
 
-    const draw = () => {
+    const draw = (): void => {
       ctx.clearRect(
         0,
         0,
@@ -444,15 +486,30 @@ function ParticleField() {
 function App() {
   const [open, setOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeSection, setActiveSection] = useState("home");
-  const getProjectSlug = (project) =>
+
+  // Reference portfolio typography: Figtree + Syne + Geist Mono
+  useEffect(() => {
+    const fontId = "portfolio-reference-fonts";
+
+    if (!document.getElementById(fontId)) {
+      const link = document.createElement("link");
+      link.id = fontId;
+      link.rel = "stylesheet";
+      link.href =
+        "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
+
+  const getProjectSlug = (project: Project): string =>
     project.title
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
-  const getProjectFromHistory = () => {
+  const getProjectFromHistory = (): Project | null => {
     const state = window.history.state;
 
     if (state?.projectDetail && state?.projectTitle) {
@@ -463,7 +520,6 @@ function App() {
       );
     }
 
-    // Also support opening a project directly from its URL hash.
     const hash = window.location.hash;
 
     if (hash.startsWith("#project-")) {
@@ -479,13 +535,11 @@ function App() {
     return null;
   };
 
-  const openProject = (project) => {
+  const openProject = (project: Project): void => {
     const projectSlug = getProjectSlug(project);
 
     setSelectedProject(project);
 
-    // If this project is already the active history entry, do not
-    // create another duplicate entry.
     if (
       window.history.state?.projectDetail &&
       window.history.state?.projectTitle === project.title
@@ -504,9 +558,7 @@ function App() {
     );
   };
 
-  const closeProject = () => {
-    // Going back instead of simply hiding the overlay is important:
-    // it makes the browser Back and Forward buttons work naturally.
+  const closeProject = (): void => {
     if (window.history.state?.projectDetail) {
       window.history.back();
     } else {
@@ -514,8 +566,8 @@ function App() {
     }
   };
 
-  const heroRef = useRef(null);
-  const projectDetailRef = useRef(null);
+  const heroRef = useRef<HTMLElement | null>(null);
+  const projectDetailRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!resumeOpen) return;
@@ -532,30 +584,16 @@ function App() {
       document.body.classList.remove("resume-open");
     };
   }, [resumeOpen]);
-    // Browser Back + Forward button support
-  //
-  // Back:
-  //   Project -> Homepage
-  //
-  // Forward:
-  //   Homepage -> same Project
-  //
-  // This also restores the correct project when navigating through
-  // multiple project history entries.
+  // Browser Back / Forward button support
   useEffect(() => {
     const syncProjectWithHistory = () => {
       const project = getProjectFromHistory();
       setSelectedProject(project);
     };
 
-    // Handles browser Back and Forward.
     window.addEventListener("popstate", syncProjectWithHistory);
-
-    // Handles direct project URLs / hash navigation.
     window.addEventListener("hashchange", syncProjectWithHistory);
 
-    // Restore the correct state if the page is loaded directly on
-    // a project URL such as #project-broke-but-thriving.
     syncProjectWithHistory();
 
     return () => {
@@ -568,7 +606,7 @@ function App() {
     if (!selectedProject) return;
 
     const handleEscape = (event) => {
-      if (event.key === "Escape") closeProject();
+      if (event.key === "Escape") setSelectedProject(null);
     };
 
     document.addEventListener("keydown", handleEscape);
@@ -706,7 +744,7 @@ function App() {
      SCROLL FUNCTION
   ========================================= */
 
-  const scrollTo = (id) => {
+  const scrollTo = (id: string): void => {
     document
       .getElementById(id)
       ?.scrollIntoView({
@@ -719,6 +757,48 @@ function App() {
 
   return (
     <div className="site">
+
+      {/* Reference portfolio typography */}
+      <style>{`
+        body,
+        .site {
+          font-family: "Figtree", sans-serif !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        .hero-intro-name,
+        .project-detail-hero h1,
+        .project-detail-copy h2,
+        .project h3,
+        .experience-card h3,
+        .skill-card h3 {
+          font-family: "Syne", sans-serif !important;
+        }
+
+        .section-index,
+        .project-number,
+        .project-type,
+        .project-detail-kicker,
+        .project-detail-label,
+        .project-detail-repository > span:first-child,
+        .project-detail-visual-label,
+        .project-detail-visual-number,
+        .resume-drawer-kicker,
+        .experience-year,
+        .tags span,
+        .experience-tags span {
+          font-family: "Geist Mono", monospace !important;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+          font-family: "Figtree", sans-serif !important;
+        }
+      `}</style>
 
       {/* Decorative background layers — never intercept project clicks */}
       <div className="neural-background-layer" aria-hidden="true">
@@ -1056,20 +1136,13 @@ function App() {
 
               <div className="project-detail-divider" />
 
-              {/* REPOSITORY */}
+              {/* REPOSITORY — plain text URL, not clickable */}
               <div className="project-detail-repository">
                 <span>PROJECT REPOSITORY</span>
-                <a
-                  href={selectedProject.repo}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View on GitHub
-                  <ArrowUpRight size={15} />
-                </a>
+                <span>{selectedProject.repo}</span>
               </div>
 
-              {/* DETAIL SECTIONS — edit the placeholder text below for each project. */}
+              {/* PROJECT CASE STUDY SECTIONS */}
               <div className="project-detail-sections">
                 <motion.section
                   className="project-detail-row"
@@ -1078,14 +1151,10 @@ function App() {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 >
-                  <div className="project-detail-label">THE PROBLEM</div>
+                  <div className="project-detail-label">PROJECT OVERVIEW</div>
                   <div className="project-detail-copy">
-                    <h2>Add the problem statement here</h2>
-                    <p>
-                      Add the real-world problem this project was created to
-                      solve. Explain who experienced the problem, why it
-                      mattered, and what gap your project addressed.
-                    </p>
+                    <h2>Turning spending data into better decisions</h2>
+                    <p>{selectedProject.details.problem || selectedProject.details.overview}</p>
                   </div>
                 </motion.section>
 
@@ -1098,7 +1167,7 @@ function App() {
                 >
                   <div className="project-detail-label">TECHNICAL APPROACH</div>
                   <div className="project-detail-copy">
-                    <h2>Explain how you built it</h2>
+                    <h2>From financial data to predictive insight</h2>
                     <p>{selectedProject.details.technical}</p>
                   </div>
                 </motion.section>
@@ -1112,12 +1181,8 @@ function App() {
                 >
                   <div className="project-detail-label">ARCHITECTURE</div>
                   <div className="project-detail-copy">
-                    <h2>Describe the system architecture</h2>
-                    <p>
-                      Leave this section for your architecture explanation.
-                      Describe the frontend, backend, database, APIs, models,
-                      services, or other layers and how data moves between them.
-                    </p>
+                    <h2>Connecting the application layers</h2>
+                    <p>{selectedProject.details.architecture || selectedProject.details.technical}</p>
                   </div>
                 </motion.section>
 
@@ -1130,7 +1195,7 @@ function App() {
                 >
                   <div className="project-detail-label">MY LEARNING</div>
                   <div className="project-detail-copy">
-                    <h2>What you learned while building it</h2>
+                    <h2>Building reliable ML, not just accurate models</h2>
                     <p>{selectedProject.details.learning}</p>
                   </div>
                 </motion.section>
@@ -1144,30 +1209,8 @@ function App() {
                 >
                   <div className="project-detail-label">KEY INTEGRATION</div>
                   <div className="project-detail-copy">
-                    <h2>Highlight the most important integration</h2>
-                    <p>
-                      Add the most interesting integration here — for example,
-                      an AI model, API, database, authentication flow, maps,
-                      external service, or another important system component.
-                    </p>
-                  </div>
-                </motion.section>
-
-                <motion.section
-                  className="project-detail-row"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                >
-                  <div className="project-detail-label">RESULTS</div>
-                  <div className="project-detail-copy">
-                    <h2>Show what the system achieved</h2>
-                    <p>
-                      Leave this section for measurable outcomes, evaluation
-                      results, performance improvements, user impact, or other
-                      evidence showing what the project achieved.
-                    </p>
+                    <h2>Giving the AI copilot access to real application context</h2>
+                    <p>{selectedProject.details.integration || selectedProject.details.learning}</p>
                   </div>
                 </motion.section>
 
@@ -1180,12 +1223,8 @@ function App() {
                 >
                   <div className="project-detail-label">WHAT I LEARNED</div>
                   <div className="project-detail-copy">
-                    <h2>What this project taught me</h2>
-                    <p>
-                      Add your final reflection here. Focus on the technical,
-                      product, problem-solving, or collaboration lessons that
-                      you would want a recruiter to remember.
-                    </p>
+                    <h2>Building an AI system as a product</h2>
+                    <p>{selectedProject.details.finalLearning || selectedProject.details.learning}</p>
                   </div>
                 </motion.section>
               </div>
@@ -1942,8 +1981,8 @@ function App() {
 
             {projects.map(
               (
-                project,
-                index
+                project: Project,
+                index: number
               ) => (
 
                 <motion.article
@@ -1959,7 +1998,7 @@ function App() {
 
                   onClick={() => openProject(project)}
 
-                  onKeyDown={(event) => {
+                  onKeyDown={(event: KeyboardEvent<HTMLElement>) => {
                     if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
                       openProject(project);
@@ -2109,8 +2148,8 @@ function App() {
 
             {skills.map(
               (
-                group,
-                index
+                group: SkillGroup,
+                index: number
               ) => {
 
                 const Icon =
