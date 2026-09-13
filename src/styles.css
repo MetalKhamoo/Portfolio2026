@@ -2495,3 +2495,276 @@ body.project-detail-open {
     max-height: 340px !important;
   }
 }
+
+/* =========================================================
+   PROJECT DETAIL — HOMEPAGE-LIKE SMOOTH SCROLL + REFERENCE
+   The homepage layout is untouched. These rules only apply
+   while a project detail page is open.
+========================================================= */
+
+.project-detail-layer {
+  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  touch-action: pan-y;
+  scrollbar-gutter: stable;
+}
+
+.project-detail-shell {
+  min-height: max-content;
+}
+
+.project-detail-content {
+  padding-bottom: 80px;
+}
+
+/* Keep the detail rows visually close to the reference page. */
+.project-detail-row {
+  min-height: 150px;
+}
+
+.project-detail-label {
+  text-transform: uppercase;
+}
+
+.project-detail-copy h2 {
+  margin-bottom: 14px;
+}
+
+@media (max-width: 760px) {
+  .project-detail-layer {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .project-detail-content {
+    padding-bottom: 50px;
+  }
+}
+/* =========================================================
+   PROJECT DETAIL — REFERENCE TYPOGRAPHY
+   ========================================================= */
+
+.project-detail-layer {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* Main project title */
+.project-detail-hero h1 {
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+/* Project subtitle / intro */
+.project-detail-hero p {
+  max-width: 720px;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+  color: #8995a8;
+}
+
+/* GitHub / repository link */
+.project-detail-layer .project-detail-link,
+.project-detail-layer a {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   DETAIL CONTENT ROWS
+   ========================================================= */
+
+.project-detail-section {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  column-gap: 34px;
+  padding: 30px 0;
+  border-top: 1px solid rgba(125, 155, 190, 0.22);
+}
+
+/* Small label on left */
+.project-detail-section-label {
+  font-size: 7px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #4d86b8;
+}
+
+/* Section heading */
+.project-detail-section h2 {
+  margin: 0 0 13px;
+
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+  color: #e7edf7;
+}
+
+/* Section paragraph */
+.project-detail-section p {
+  margin: 0;
+  max-width: 650px;
+
+  font-size: 11px;
+  line-height: 1.7;
+  font-weight: 400;
+
+  letter-spacing: 0;
+  color: #7e8da3;
+}
+
+/* Multiple paragraphs */
+.project-detail-section p + p {
+  margin-top: 12px;
+}
+
+/* =========================================================
+   DETAIL CONTENT WIDTH
+   ========================================================= */
+
+.project-detail-content {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* =========================================================
+   TOP PROJECT LINK ROW
+   ========================================================= */
+
+.project-detail-repo {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  column-gap: 34px;
+
+  padding: 27px 0;
+  border-top: 1px solid rgba(125, 155, 190, 0.22);
+  border-bottom: 1px solid rgba(125, 155, 190, 0.22);
+}
+
+.project-detail-repo-label {
+  font-size: 7px;
+  line-height: 1.25;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #4d86b8;
+}
+
+.project-detail-repo a {
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #e8eef8;
+  text-decoration: none;
+}
+
+/* =========================================================
+   TECHNOLOGY TAGS
+   ========================================================= */
+
+.project-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-detail-tags span {
+  font-size: 7px;
+  line-height: 1;
+
+  padding: 5px 8px;
+
+  border: 1px solid rgba(80, 130, 175, 0.35);
+  border-radius: 999px;
+
+  color: #7890a9;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   REFERENCE-LIKE SPACING
+   ========================================================= */
+
+.project-detail-layer .project-detail-body {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.project-detail-layer .project-detail-body > section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .project-detail-content,
+  .project-detail-layer .project-detail-body {
+    width: calc(100% - 32px);
+  }
+
+  .project-detail-section,
+  .project-detail-repo {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .project-detail-section-label,
+  .project-detail-repo-label {
+    margin-bottom: 2px;
+  }
+
+  .project-detail-section h2 {
+    font-size: 15px;
+  }
+
+  .project-detail-section p {
+    font-size: 11px;
+  }
+
+  .project-detail-hero h1 {
+    font-size: 42px;
+  }
+}
+/* =========================================================
+   PROJECT DETAIL — REFERENCE FONT
+   ========================================================= */
+
+.project-detail-layer {
+  font-family:
+    "Inter",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.project-detail-layer h1,
+.project-detail-layer h2,
+.project-detail-layer h3,
+.project-detail-layer p,
+.project-detail-layer a,
+.project-detail-layer span {
+  font-family: inherit;
+}

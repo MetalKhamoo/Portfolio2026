@@ -448,6 +448,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("home");
 
   const heroRef = useRef(null);
+  const projectDetailRef = useRef(null);
 
   useEffect(() => {
     if (!resumeOpen) return;
@@ -475,9 +476,41 @@ function App() {
     document.addEventListener("keydown", handleEscape);
     document.body.classList.add("project-detail-open");
 
+    // Start the detail page at the top every time a project is opened.
+    if (projectDetailRef.current) {
+      projectDetailRef.current.scrollTop = 0;
+    }
+
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.body.classList.remove("project-detail-open");
+    };
+  }, [selectedProject]);
+
+  /* =========================================
+     PROJECT DETAIL SMOOTH SCROLL
+     Uses its own Lenis instance so the project
+     page scrolls exactly like the homepage while
+     keeping the homepage untouched underneath.
+  ========================================= */
+
+  useEffect(() => {
+    if (!selectedProject || !projectDetailRef.current) return;
+
+    const detailLayer = projectDetailRef.current;
+    const detailContent = detailLayer.querySelector(".project-detail-shell");
+
+    const detailLenis = new Lenis({
+      wrapper: detailLayer,
+      content: detailContent,
+      duration: 1.15,
+      smoothWheel: true,
+      syncTouch: true,
+      autoRaf: true,
+    });
+
+    return () => {
+      detailLenis.destroy();
     };
   }, [selectedProject]);
 
@@ -854,7 +887,7 @@ function App() {
 
 
       {selectedProject && (
-        <div className="project-detail-layer">
+        <div ref={projectDetailRef} className="project-detail-layer">
           <div className="project-detail-shell">
             <header className="project-detail-nav">
               <button
@@ -938,73 +971,125 @@ function App() {
                 </a>
               </div>
 
-              {/* DETAIL SECTIONS */}
+              {/* DETAIL SECTIONS — edit the placeholder text below for each project. */}
               <div className="project-detail-sections">
-                <section className="project-detail-row">
-                  <div className="project-detail-label">
-                    PROJECT OVERVIEW
-                  </div>
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">THE PROBLEM</div>
                   <div className="project-detail-copy">
-                    <h2>{
-                      selectedProject.title === "Broke But Thriving"
-                        ? "Building a smarter personal finance workflow"
-                        : "The problem and the solution"
-                    }</h2>
-                    <p>{selectedProject.details.overview}</p>
-                  </div>
-                </section>
-
-                <section className="project-detail-row">
-                  <div className="project-detail-label">
-                    TECHNICAL APPROACH
-                  </div>
-                  <div className="project-detail-copy">
-                    <h2>How the system works</h2>
-                    <p>{selectedProject.details.technical}</p>
-                  </div>
-                </section>
-
-                <section className="project-detail-row">
-                  <div className="project-detail-label">
-                    KEY FEATURES
-                  </div>
-                  <div className="project-detail-copy">
-                    <h2>What the system does</h2>
-                    <div className="project-feature-list">
-                      {selectedProject.details.features.map((feature, index) => (
-                        <div className="project-feature-item" key={feature}>
-                          <span>0{index + 1}</span>
-                          <p>{feature}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-
-                <section className="project-detail-row">
-                  <div className="project-detail-label">
-                    IMPLEMENTATION
-                  </div>
-                  <div className="project-detail-copy">
-                    <h2>Turning the idea into a working product</h2>
+                    <h2>Add the problem statement here</h2>
                     <p>
-                      The project brings its interface, application logic,
-                      data layer and technology stack together as one usable
-                      workflow. The implementation decisions were made around
-                      the actual problem the project is intended to solve.
+                      Add the real-world problem this project was created to
+                      solve. Explain who experienced the problem, why it
+                      mattered, and what gap your project addressed.
                     </p>
                   </div>
-                </section>
+                </motion.section>
 
-                <section className="project-detail-row">
-                  <div className="project-detail-label">
-                    WHAT I LEARNED
-                  </div>
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">TECHNICAL APPROACH</div>
                   <div className="project-detail-copy">
-                    <h2>What this project taught me</h2>
+                    <h2>Explain how you built it</h2>
+                    <p>{selectedProject.details.technical}</p>
+                  </div>
+                </motion.section>
+
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">ARCHITECTURE</div>
+                  <div className="project-detail-copy">
+                    <h2>Describe the system architecture</h2>
+                    <p>
+                      Leave this section for your architecture explanation.
+                      Describe the frontend, backend, database, APIs, models,
+                      services, or other layers and how data moves between them.
+                    </p>
+                  </div>
+                </motion.section>
+
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">MY LEARNING</div>
+                  <div className="project-detail-copy">
+                    <h2>What you learned while building it</h2>
                     <p>{selectedProject.details.learning}</p>
                   </div>
-                </section>
+                </motion.section>
+
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">KEY INTEGRATION</div>
+                  <div className="project-detail-copy">
+                    <h2>Highlight the most important integration</h2>
+                    <p>
+                      Add the most interesting integration here — for example,
+                      an AI model, API, database, authentication flow, maps,
+                      external service, or another important system component.
+                    </p>
+                  </div>
+                </motion.section>
+
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">RESULTS</div>
+                  <div className="project-detail-copy">
+                    <h2>Show what the system achieved</h2>
+                    <p>
+                      Leave this section for measurable outcomes, evaluation
+                      results, performance improvements, user impact, or other
+                      evidence showing what the project achieved.
+                    </p>
+                  </div>
+                </motion.section>
+
+                <motion.section
+                  className="project-detail-row"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="project-detail-label">WHAT I LEARNED</div>
+                  <div className="project-detail-copy">
+                    <h2>What this project taught me</h2>
+                    <p>
+                      Add your final reflection here. Focus on the technical,
+                      product, problem-solving, or collaboration lessons that
+                      you would want a recruiter to remember.
+                    </p>
+                  </div>
+                </motion.section>
               </div>
 
               {/* FOOTER */}
