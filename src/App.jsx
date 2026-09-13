@@ -446,23 +446,67 @@ function App() {
   const [resumeOpen, setResumeOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeSection, setActiveSection] = useState("home");
+  const getProjectSlug = (project) =>
+    project.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+
+  const getProjectFromHistory = () => {
+    const state = window.history.state;
+
+    if (state?.projectDetail && state?.projectTitle) {
+      return (
+        projects.find(
+          (project) => project.title === state.projectTitle
+        ) || null
+      );
+    }
+
+    // Also support opening a project directly from its URL hash.
+    const hash = window.location.hash;
+
+    if (hash.startsWith("#project-")) {
+      const slug = hash.replace("#project-", "");
+
+      return (
+        projects.find(
+          (project) => getProjectSlug(project) === slug
+        ) || null
+      );
+    }
+
+    return null;
+  };
+
   const openProject = (project) => {
+    const projectSlug = getProjectSlug(project);
+
     setSelectedProject(project);
+
+    // If this project is already the active history entry, do not
+    // create another duplicate entry.
+    if (
+      window.history.state?.projectDetail &&
+      window.history.state?.projectTitle === project.title
+    ) {
+      return;
+    }
 
     window.history.pushState(
       {
+        ...(window.history.state || {}),
         projectDetail: true,
         projectTitle: project.title,
       },
       "",
-      `#project-${project.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "")}`
+      `#project-${projectSlug}`
     );
   };
 
   const closeProject = () => {
+    // Going back instead of simply hiding the overlay is important:
+    // it makes the browser Back and Forward buttons work naturally.
     if (window.history.state?.projectDetail) {
       window.history.back();
     } else {
@@ -488,16 +532,35 @@ function App() {
       document.body.classList.remove("resume-open");
     };
   }, [resumeOpen]);
-    // Browser back button support
+    // Browser Back + Forward button support
+  //
+  // Back:
+  //   Project -> Homepage
+  //
+  // Forward:
+  //   Homepage -> same Project
+  //
+  // This also restores the correct project when navigating through
+  // multiple project history entries.
   useEffect(() => {
-    const handlePopState = () => {
-      setSelectedProject(null);
+    const syncProjectWithHistory = () => {
+      const project = getProjectFromHistory();
+      setSelectedProject(project);
     };
 
-    window.addEventListener("popstate", handlePopState);
+    // Handles browser Back and Forward.
+    window.addEventListener("popstate", syncProjectWithHistory);
+
+    // Handles direct project URLs / hash navigation.
+    window.addEventListener("hashchange", syncProjectWithHistory);
+
+    // Restore the correct state if the page is loaded directly on
+    // a project URL such as #project-broke-but-thriving.
+    syncProjectWithHistory();
 
     return () => {
-      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("popstate", syncProjectWithHistory);
+      window.removeEventListener("hashchange", syncProjectWithHistory);
     };
   }, []);
 
