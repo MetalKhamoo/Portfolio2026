@@ -3915,3 +3915,311 @@ body.project-detail-open {
     padding-right: 20px !important;
   }
 }
+/* =========================================================
+   SELECTED WORK — REFERENCE CARD LAYOUT
+   ========================================================= */
+
+#work .projects {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+  align-items: stretch !important;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+#work .project,
+#work .project.featured {
+  position: relative !important;
+
+  width: 100% !important;
+  height: 395px !important;
+  min-height: 395px !important;
+  max-height: 395px !important;
+
+  padding: 36px !important;
+  margin: 0 !important;
+
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  border-radius: 12px !important;
+
+  border: 1px solid rgba(120, 175, 220, 0.20) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 25, 40, 0.98),
+      rgba(10, 17, 29, 0.98)
+    ) !important;
+
+  overflow: hidden !important;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease !important;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+#work .project:hover {
+  transform: translateY(-4px) !important;
+
+  border-color: rgba(85, 170, 255, 0.35) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 31, 49, 1),
+      rgba(10, 18, 30, 1)
+    ) !important;
+}
+
+
+/* =========================================================
+   TOP ROW
+   ========================================================= */
+
+#work .project-top {
+  width: 100% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  margin: 0 !important;
+
+  flex: 0 0 auto !important;
+
+  font-size: 11px !important;
+  line-height: 1 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+
+/* Year */
+
+#work .project-number {
+  color: #5e7187 !important;
+}
+
+
+/* Category */
+
+#work .project-type {
+  color: #6faee8 !important;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+#work .project-body {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin-top: 25px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+#work .project h3 {
+  width: 100% !important;
+
+  margin: 0 0 15px !important;
+
+  font-size: clamp(25px, 2.3vw, 31px) !important;
+
+  line-height: 1.08 !important;
+
+  letter-spacing: -0.045em !important;
+
+  color: #dce7f3 !important;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+#work .project p {
+  width: 100% !important;
+
+  max-width: 100% !important;
+
+  margin: 0 !important;
+
+  color: #8495aa !important;
+
+  font-size: 13.5px !important;
+
+  line-height: 1.65 !important;
+
+  display: -webkit-box !important;
+
+  -webkit-box-orient: vertical !important;
+
+  -webkit-line-clamp: 3 !important;
+
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   REPOSITORY / CASE STUDY LINK
+   ========================================================= */
+
+#work .project-link,
+#work .project-details-link {
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  gap: 8px !important;
+
+  width: fit-content !important;
+
+  margin-top: 22px !important;
+
+  padding: 0 !important;
+
+  color: #8ba7c3 !important;
+
+  font-size: 11px !important;
+
+  font-weight: 600 !important;
+
+  letter-spacing: 0.12em !important;
+
+  text-transform: uppercase !important;
+
+  flex: 0 0 auto !important;
+}
+
+
+#work .project-link:hover,
+#work .project-details-link:hover {
+  color: #dce7f3 !important;
+}
+
+
+/* =========================================================
+   TAGS
+   ========================================================= */
+
+#work .tags {
+  width: 100% !important;
+
+  display: flex !important;
+
+  flex-wrap: wrap !important;
+
+  align-items: center !important;
+
+  gap: 7px !important;
+
+  margin: 0 !important;
+
+  margin-top: auto !important;
+
+  padding-top: 20px !important;
+
+  flex: 0 0 auto !important;
+}
+
+
+#work .tags span {
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  padding: 6px 9px !important;
+
+  border-radius: 999px !important;
+
+  border: 1px solid rgba(120, 175, 220, 0.17) !important;
+
+  background: rgba(10, 20, 32, 0.45) !important;
+
+  color: #657a91 !important;
+
+  font-size: 9px !important;
+
+  line-height: 1 !important;
+
+  letter-spacing: 0.04em !important;
+
+  white-space: nowrap !important;
+}
+
+
+/* =========================================================
+   FEATURED CARD
+   ========================================================= */
+
+#work .project.featured {
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(85, 170, 255, 0.08),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      #101c2c,
+      #0a111b
+    ) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+  #work .projects {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  #work .project,
+  #work .project.featured {
+    height: 395px !important;
+    min-height: 395px !important;
+    max-height: 395px !important;
+
+    padding: 28px !important;
+  }
+
+  #work .project h3 {
+    font-size: 28px !important;
+  }
+
+  #work .project p {
+    font-size: 13px !important;
+  }
+}
