@@ -446,6 +446,29 @@ function App() {
   const [resumeOpen, setResumeOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeSection, setActiveSection] = useState("home");
+  const openProject = (project) => {
+    setSelectedProject(project);
+
+    window.history.pushState(
+      {
+        projectDetail: true,
+        projectTitle: project.title,
+      },
+      "",
+      `#project-${project.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")}`
+    );
+  };
+
+  const closeProject = () => {
+    if (window.history.state?.projectDetail) {
+      window.history.back();
+    } else {
+      setSelectedProject(null);
+    }
+  };
 
   const heroRef = useRef(null);
   const projectDetailRef = useRef(null);
@@ -465,12 +488,24 @@ function App() {
       document.body.classList.remove("resume-open");
     };
   }, [resumeOpen]);
+    // Browser back button support
+  useEffect(() => {
+    const handlePopState = () => {
+      setSelectedProject(null);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   useEffect(() => {
     if (!selectedProject) return;
 
     const handleEscape = (event) => {
-      if (event.key === "Escape") setSelectedProject(null);
+      if (event.key === "Escape") closeProject();
     };
 
     document.addEventListener("keydown", handleEscape);
@@ -893,7 +928,7 @@ function App() {
               <button
                 className="project-detail-brand"
                 type="button"
-                onClick={() => setSelectedProject(null)}
+                onClick={closeProject}
                 aria-label="Back to portfolio"
               >
                 PD<span>.</span>
@@ -902,7 +937,7 @@ function App() {
               <button
                 className="project-detail-back"
                 type="button"
-                onClick={() => setSelectedProject(null)}
+                onClick={closeProject}
               >
                 <span className="project-detail-back-arrow">←</span>
                 All Projects
@@ -1106,7 +1141,7 @@ function App() {
 
                 <button
                   type="button"
-                  onClick={() => setSelectedProject(null)}
+                  onClick={closeProject}
                 >
                   <span>←</span>
                   Back to Projects
@@ -1859,14 +1894,12 @@ function App() {
                     project.title
                   }
 
-                  onClick={() =>
-                    setSelectedProject(project)
-                  }
+                  onClick={() => openProject(project)}
 
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
-                      setSelectedProject(project);
+                      openProject(project);
                     }
                   }}
 
