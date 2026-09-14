@@ -4252,3 +4252,48 @@ body.project-detail-open {
     font-size: 52px !important;
   }
 }
+/* =========================================
+   PROJECT DETAIL — CONSISTENT DIVIDER WIDTHS
+========================================= */
+
+.project-detail-shell {
+  width: 100%;
+}
+
+.project-detail-content {
+  width: 100%;
+}
+
+.project-detail-divider,
+.project-detail-repository,
+.project-detail-row {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Main divider */
+.project-detail-divider {
+  width: 100% !important;
+}
+
+/* Repository separator */
+.project-detail-repository {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Case-study section separators */
+.project-detail-row {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Make sure borders themselves use the full width */
+.project-detail-repository::after,
+.project-detail-row::after {
+  width: 100% !important;
+  max-width: none !important;
+}

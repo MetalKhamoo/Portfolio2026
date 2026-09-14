@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import type { KeyboardEvent,} from "react";
+import type { KeyboardEvent } from "react";
 import NeuralBackground from "./components/NeuralBackground";
 import Lenis from "lenis";
 import { motion } from "framer-motion";
@@ -57,6 +57,12 @@ interface ProjectDetails {
   integration?: string;
   learning?: string;
   finalLearning?: string;
+  overviewTitle?: string;
+  technicalTitle?: string;
+  architectureTitle?: string;
+  learningTitle?: string;
+  integrationTitle?: string;
+  finalLearningTitle?: string;
 }
 
 interface Project {
@@ -66,6 +72,8 @@ interface Project {
   description: string;
   stack: string[];
   repo: string;
+  duration?: string;
+  role?: string;
   featured?: boolean;
   image?: string;
   details: ProjectDetails;
@@ -88,6 +96,8 @@ const projects: Project[] = [
     type: "AI + FULL-STACK",
     description:
       "A personal finance management system combining predictive machine learning with an AI copilot for expense logging, simulations and personalized recommendations.",
+    duration: "3 months",
+    role: "Solo Developer",
     stack: [
       "React",
       "FastAPI",
@@ -131,6 +141,8 @@ const projects: Project[] = [
     type: "AI + FRONTEND",
     description:
       "A modern CRM application focused on turning customer information and workflows into a more intelligent and usable interface.",
+    duration: "3 months",
+    role: "Solo Developer",
     stack: [
       "React",
       "TypeScript",
@@ -161,38 +173,68 @@ const projects: Project[] = [
     title: "Placement Cell Management System",
     type: "FULL-STACK",
     description:
-      "A role-based campus recruitment platform connecting students, administrators, HOD, principal and placement teams through centralized workflows.",
+      "A role-based campus recruitment platform that centralizes student profiles, departmental approvals, company eligibility filtering and end-to-end placement-drive tracking.",
+    duration: "3 months",
+    role: "Solo Developer",
     stack: [
       "PHP",
       "MySQL",
       "JavaScript",
+      "Bootstrap",
       "Role-based Access",
     ],
     repo:
       "https://github.com/MetalKhamoo/PCMS",
     details: {
       overview:
-        "The Placement Cell Management System is a role-based campus recruitment platform designed to centralise placement workflows for students, administrators, HODs, the principal and the placement team.",
+        "The Placement Cell Management System is a role-based web application designed to centralize the campus recruitment workflow. It connects students, HODs, the placement team and the principal through a shared system for managing student profiles, academic eligibility, placement drives and recruitment progress.",
       technical:
-        "The system was developed using PHP, MySQL and JavaScript, with role-based access controlling the workflows and information available to different users.",
+        "The application is built using PHP, MySQL, JavaScript and Bootstrap. PHP handles the application logic and session-based access, while MySQL stores student profiles, academic records, placement drives and recruitment outcomes. The system uses database queries to filter students against company-specific academic and backlog requirements.",
       features: [
-        "Role-based user access",
-        "Centralised placement workflows",
-        "Student and administrator management",
-        "Placement coordination",
-        "MySQL-backed data management",
+        "Role-based access for students, HODs, placement team and principal",
+        "Student academic and personal profile management",
+        "HOD-based student profile approval",
+        "Placement drive creation and management",
+        "Company-specific eligibility filtering",
+        "Academic and backlog-based student filtering",
+        "Placement drive progress tracking",
+        "Written test, GD and technical round tracking",
+        "Final placement status tracking",
+        "Placement statistics and dashboard information",
       ],
+      problem:
+        "Managing campus placements involves multiple stakeholders and large amounts of student and recruitment data. Manually checking academic eligibility, maintaining student information and tracking candidates across multiple recruitment stages can become difficult to manage. PCMS was built to bring these workflows into one centralized platform.",
+      architecture:
+        "The system follows a relational database-driven architecture built around student records, placement drives and drive outcomes. Student information and academic records are maintained in the student database, while company requirements are stored with individual placement drives. Student-drive relationships are then used to track recruitment progress from eligibility and attendance through written tests, group discussions, technical rounds and final placement.",
+      integration:
+        "The key integration is between company eligibility criteria and student academic data. Placement requirements such as branch, academic scores, current backlogs, previous backlogs and detained years can be used to query the student database and identify eligible candidates. These candidates can then be connected to a placement drive and tracked through its recruitment stages.",
       learning:
-        "This project gave me practical experience with role-based application design, relational databases and building software around multiple user roles and institutional workflows.",
+        "I learned how to design role-based web applications where different users need access to different workflows and information. I also gained practical experience with relational database design, PHP session handling, SQL queries, CRUD operations and building eligibility logic around multiple academic and placement criteria.",
+      finalLearning:
+        "The biggest takeaway from PCMS was learning that a real-world management system is more than a collection of individual features. The project taught me how users, permissions, database relationships and business workflows need to work together reliably. Designing the placement process from student registration through final selection helped me understand how software can turn a complex manual process into a structured workflow.",
+      overviewTitle:
+        "Centralising the campus placement workflow",
+      technicalTitle:
+        "Managing placement data with PHP and MySQL",
+      architectureTitle:
+        "Connecting students, drives and recruitment stages",
+      learningTitle:
+        "Building role-based workflows around relational data",
+      integrationTitle:
+        "Matching company requirements with eligible students",
+      finalLearningTitle:
+        "Turning a manual process into a structured system",
     },
   },
 
   {
     year: "2025",
-    title: "PawRescue",
+    title: "PawRescue", 
     type: "ANDROID",
     description:
       "An Android application for reporting injured or stray animals with image uploads, location pinning and database-backed rescue workflows.",
+    duration: "3 months",
+    role: "Solo Developer",
     stack: [
       "Java",
       "Android",
@@ -606,7 +648,7 @@ function App() {
     if (!selectedProject) return;
 
     const handleEscape = (event) => {
-      if (event.key === "Escape") setSelectedProject(null);
+      if (event.key === "Escape") closeProject();
     };
 
     document.addEventListener("keydown", handleEscape);
@@ -797,6 +839,143 @@ function App() {
         textarea,
         select {
           font-family: "Figtree", sans-serif !important;
+        }
+
+        /* =========================================
+           PROJECT DETAIL — EDITORIAL META
+           Matches the reference layout:
+           DURATION / ROLE → TECH TAGS → DIVIDER → REPOSITORY
+        ========================================= */
+
+        .project-detail-meta {
+          width: 100% !important;
+          max-width: 100% !important;
+          display: grid !important;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+          gap: 64px !important;
+          margin: 26px 0 0 !important;
+          padding: 0 !important;
+          box-sizing: border-box !important;
+        }
+
+        .project-detail-meta-item {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 8px !important;
+          min-width: 0 !important;
+        }
+
+        .project-detail-meta-label {
+          display: block !important;
+          font-family: "Geist Mono", monospace !important;
+          font-size: 9px !important;
+          line-height: 1.2 !important;
+          letter-spacing: 0.18em !important;
+          text-transform: uppercase !important;
+          color: #5b8fc4 !important;
+        }
+
+        .project-detail-meta-value {
+          display: block !important;
+          font-family: "Figtree", sans-serif !important;
+          font-size: 13px !important;
+          line-height: 1.45 !important;
+          color: #78a7d4 !important;
+        }
+
+        .project-detail-tech-tags {
+          width: 100% !important;
+          max-width: 100% !important;
+          display: flex !important;
+          flex-wrap: wrap !important;
+          align-items: center !important;
+          gap: 7px !important;
+          margin: 20px 0 40px !important;
+          padding: 0 !important;
+          box-sizing: border-box !important;
+        }
+
+        .project-detail-tech-tags span {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          padding: 5px 9px !important;
+          border: 1px solid rgba(75, 130, 190, 0.35) !important;
+          border-radius: 999px !important;
+          background: rgba(20, 40, 65, 0.16) !important;
+          font-family: "Geist Mono", monospace !important;
+          font-size: 8px !important;
+          line-height: 1 !important;
+          letter-spacing: 0.04em !important;
+          text-transform: uppercase !important;
+          color: #6698c9 !important;
+          white-space: nowrap !important;
+        }
+
+        /* Every horizontal separator uses the exact same width. */
+        .project-detail-divider,
+        .project-detail-repository,
+        .project-detail-row {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          box-sizing: border-box !important;
+        }
+
+        .project-detail-divider {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .project-detail-repository {
+          display: grid !important;
+          grid-template-columns: 180px minmax(0, 1fr) !important;
+          column-gap: 6px !important;
+        }
+
+        .project-detail-repository > span {
+          min-width: 0 !important;
+          overflow-wrap: anywhere !important;
+        }
+
+        .project-detail-row {
+          box-sizing: border-box !important;
+        }
+
+        @media (max-width: 700px) {
+          .project-detail-meta {
+            gap: 34px !important;
+          }
+
+          .project-detail-repository {
+            grid-template-columns: 1fr !important;
+            row-gap: 10px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .project-detail-meta {
+            gap: 24px !important;
+          }
+
+          .project-detail-meta-label {
+            font-size: 8px !important;
+          }
+
+          .project-detail-meta-value {
+            font-size: 12px !important;
+          }
+
+          .project-detail-tech-tags {
+            gap: 6px !important;
+            margin-bottom: 32px !important;
+          }
+
+          .project-detail-tech-tags span {
+            font-size: 7px !important;
+            padding: 5px 8px !important;
+          }
         }
       `}</style>
 
@@ -1102,11 +1281,6 @@ function App() {
                   {selectedProject.description}
                 </p>
 
-                <div className="project-detail-tags">
-                  {selectedProject.stack.map((tech) => (
-                    <span key={tech}>{tech}</span>
-                  ))}
-                </div>
               </section>
 
               {/* PROJECT VISUAL — optional image can be added later as project.image */}
@@ -1134,11 +1308,35 @@ function App() {
                 )}
               </section>
 
+              {/* PROJECT META — matches the editorial case-study layout */}
+              <div className="project-detail-meta">
+                <div className="project-detail-meta-item">
+                  <span className="project-detail-meta-label">DURATION</span>
+                  <span className="project-detail-meta-value">
+                    {selectedProject.duration || "—"}
+                  </span>
+                </div>
+
+                <div className="project-detail-meta-item">
+                  <span className="project-detail-meta-label">ROLE</span>
+                  <span className="project-detail-meta-value">
+                    {selectedProject.role || "—"}
+                  </span>
+                </div>
+              </div>
+
+              {/* TECHNOLOGY TAGS */}
+              <div className="project-detail-tech-tags">
+                {selectedProject.stack.map((tech) => (
+                  <span key={tech}>{tech}</span>
+                ))}
+              </div>
+
               <div className="project-detail-divider" />
 
               {/* REPOSITORY — plain text URL, not clickable */}
               <div className="project-detail-repository">
-                <span>PROJECT REPOSITORY</span>
+                <span>GITHUBURL</span>
                 <span>{selectedProject.repo}</span>
               </div>
 
@@ -1153,7 +1351,10 @@ function App() {
                 >
                   <div className="project-detail-label">PROJECT OVERVIEW</div>
                   <div className="project-detail-copy">
-                    <h2>Turning spending data into better decisions</h2>
+                    <h2>
+                      {selectedProject.details.overviewTitle ||
+                        "Turning spending data into better decisions"}
+                    </h2>
                     <p>{selectedProject.details.problem || selectedProject.details.overview}</p>
                   </div>
                 </motion.section>
@@ -1167,7 +1368,10 @@ function App() {
                 >
                   <div className="project-detail-label">TECHNICAL APPROACH</div>
                   <div className="project-detail-copy">
-                    <h2>From financial data to predictive insight</h2>
+                    <h2>
+                      {selectedProject.details.technicalTitle ||
+                        "From financial data to predictive insight"}
+                    </h2>
                     <p>{selectedProject.details.technical}</p>
                   </div>
                 </motion.section>
@@ -1181,7 +1385,10 @@ function App() {
                 >
                   <div className="project-detail-label">ARCHITECTURE</div>
                   <div className="project-detail-copy">
-                    <h2>Connecting the application layers</h2>
+                    <h2>
+                      {selectedProject.details.architectureTitle ||
+                        "Connecting the application layers"}
+                    </h2>
                     <p>{selectedProject.details.architecture || selectedProject.details.technical}</p>
                   </div>
                 </motion.section>
@@ -1195,7 +1402,10 @@ function App() {
                 >
                   <div className="project-detail-label">MY LEARNING</div>
                   <div className="project-detail-copy">
-                    <h2>Building reliable ML, not just accurate models</h2>
+                    <h2>
+                      {selectedProject.details.learningTitle ||
+                        "Building reliable ML, not just accurate models"}
+                    </h2>
                     <p>{selectedProject.details.learning}</p>
                   </div>
                 </motion.section>
@@ -1209,7 +1419,10 @@ function App() {
                 >
                   <div className="project-detail-label">KEY INTEGRATION</div>
                   <div className="project-detail-copy">
-                    <h2>Giving the AI copilot access to real application context</h2>
+                    <h2>
+                      {selectedProject.details.integrationTitle ||
+                        "Giving the AI copilot access to real application context"}
+                    </h2>
                     <p>{selectedProject.details.integration || selectedProject.details.learning}</p>
                   </div>
                 </motion.section>
@@ -1223,7 +1436,10 @@ function App() {
                 >
                   <div className="project-detail-label">WHAT I LEARNED</div>
                   <div className="project-detail-copy">
-                    <h2>Building an AI system as a product</h2>
+                    <h2>
+                      {selectedProject.details.finalLearningTitle ||
+                        "Building an AI system as a product"}
+                    </h2>
                     <p>{selectedProject.details.finalLearning || selectedProject.details.learning}</p>
                   </div>
                 </motion.section>
