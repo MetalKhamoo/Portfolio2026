@@ -4358,3 +4358,25 @@ body.project-detail-open {
     max-width: 100% !important;
   }
 }
+/* SIGNAL — move paragraph content slightly below heading */
+#about .about-right {
+  transform: translate(-35px, 25px) !important;
+}
+/* =========================================================
+   SIGNAL PARAGRAPH — TEXT-ONLY HOVER
+========================================================= */
+
+#about .about-right p {
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease !important;
+
+  cursor: default !important;
+}
+
+#about .about-right p:hover {
+  color: #b7d4ef !important;
+
+  text-shadow:
+    0 0 12px rgba(91, 160, 207, 0.22) !important;
+}
