@@ -4297,3 +4297,64 @@ body.project-detail-open {
   width: 100% !important;
   max-width: none !important;
 }
+
+/* =========================================================
+   SIGNAL / WHY I BUILD — ALIGN WITH MAIN CONTENT GRID
+   Do not affect Experience
+========================================================= */
+
+.about-reference {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.about-reference-text {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Keep the actual text column controlled */
+.about-reference-text h2,
+.about-reference-text p {
+  margin-left: 0 !important;
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .about-reference-text {
+    padding-left: 0 !important;
+  }
+
+  .about-reference-text h2 {
+    max-width: 760px !important;
+  }
+
+  .about-reference-text p {
+    max-width: 560px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1199px) {
+  .about-reference {
+    max-width: calc(100% - 80px) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .about-reference {
+    max-width: calc(100% - 40px) !important;
+  }
+
+  .about-reference-text p {
+    max-width: 100% !important;
+  }
+}
